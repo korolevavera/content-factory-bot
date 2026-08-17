@@ -216,6 +216,51 @@
         .anim { animation: fadeIn 0.3s ease forwards; }
         .loading-dots::after { content: ''; animation: dots 1.5s infinite; }
         @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60%, 100% { content: '...'; } }
+
+        /* === FAVORITE BTN === */
+        .fav-btn { width: 36px; height: 36px; border-radius: var(--radius-xs); background: var(--bg3); border: none; color: var(--text3); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0; }
+        .fav-btn.active { color: #ef4444; }
+        .fav-btn svg { width: 18px; height: 18px; }
+
+        /* === LESSON NAV === */
+        .lesson-nav { display: flex; gap: 8px; margin-top: 16px; }
+        .nav-lesson-btn { flex: 1; padding: 12px; border-radius: var(--radius-sm); background: var(--bg3); border: 1px solid rgba(255,255,255,0.04); color: var(--text2); font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.15s; font-family: inherit; }
+        .nav-lesson-btn:active { transform: scale(0.97); background: var(--bg4); }
+        .nav-lesson-btn svg { width: 16px; height: 16px; }
+        .nav-lesson-btn:disabled { opacity: 0.3; pointer-events: none; }
+
+        /* === COPY TOAST === */
+        .copy-toast { position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%); background: var(--green); color: #000; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; z-index: 100; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        .copy-toast.show { opacity: 1; }
+
+        /* === SEARCH === */
+        .search-wrap { margin: 12px 0; position: relative; }
+        .search-input { width: 100%; background: var(--bg3); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); padding: 12px 14px 12px 38px; color: var(--text); font-size: 14px; font-family: inherit; outline: none; }
+        .search-input::placeholder { color: var(--text3); }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text3); }
+        .search-icon svg { width: 16px; height: 16px; }
+        .search-results { position: absolute; top: 100%; left: 0; right: 0; background: var(--bg3); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); margin-top: 4px; max-height: 300px; overflow-y: auto; z-index: 20; display: none; }
+        .search-results.open { display: block; }
+        .search-item { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.03); transition: background 0.1s; }
+        .search-item:active { background: var(--bg4); }
+        .search-item:last-child { border-bottom: none; }
+        .search-item-title { font-size: 13px; font-weight: 600; }
+        .search-item-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+        .search-empty { padding: 14px; text-align: center; color: var(--text3); font-size: 13px; }
+
+        /* === FAVS PAGE === */
+        .fav-list { display: flex; flex-direction: column; gap: 8px; }
+        .fav-item { background: var(--bg3); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); }
+        .fav-item:active { transform: scale(0.98); background: var(--bg4); }
+        .fav-remove { width: 28px; height: 28px; border-radius: 50%; background: rgba(239,68,68,0.1); border: none; color: #ef4444; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .fav-remove svg { width: 14px; height: 14px; }
+
+        /* === LESSON SUMMARY === */
+        .lesson-summary { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.12); border-radius: var(--radius-sm); padding: 16px; margin-top: 16px; }
+        .lesson-summary-title { font-size: 14px; font-weight: 700; color: #10b981; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .lesson-summary ul { list-style: none; padding: 0; }
+        .lesson-summary li { font-size: 13px; color: var(--text2); padding: 4px 0 4px 20px; position: relative; line-height: 1.5; }
+        .lesson-summary li::before { content: '→'; position: absolute; left: 0; color: #10b981; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -234,6 +279,12 @@
                 <p>Выбери соцсеть и начни учиться — всё бесплатно</p>
             </div>
 
+            <div class="search-wrap anim">
+                <div class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                <input class="search-input" id="search-input" placeholder="Найти урок..." oninput="doSearch(this.value)" onfocus="doSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
+                <div class="search-results" id="search-results"></div>
+            </div>
+
             <button class="base-btn anim" onclick="openPlatform('base')">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 Это база — начни с этого
@@ -243,6 +294,14 @@
                 <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><div class="stat-pill-val" id="lessons-done">0</div><div class="stat-pill-label">уроков</div></div>
                 <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><div class="stat-pill-val" id="xp-count">0</div><div class="stat-pill-label">XP</div></div>
                 <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg><div class="stat-pill-val" id="level-count">1</div><div class="stat-pill-label">уровень</div></div>
+            </div>
+
+            <div style="margin:8px 0 16px" class="anim">
+                <div class="course-card" onclick="openFavs()" style="display:flex;align-items:center;gap:12px;padding:12px 14px">
+                    <div style="width:32px;height:32px;border-radius:8px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" style="width:16px;height:16px"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                    <div style="flex:1"><div style="font-size:13px;font-weight:600">Избранное</div><div style="font-size:11px;color:var(--text3)" id="fav-count-label">Сохранённые уроки</div></div>
+                    <div style="color:var(--text3);font-size:14px">→</div>
+                </div>
             </div>
 
             <div class="section anim">
@@ -300,12 +359,26 @@
 
         <!-- ===== LESSON ===== -->
         <div id="lesson-page" class="page">
-            <div class="pg-header"><button class="back-btn" onclick="showPage('course')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title" id="lesson-title"></div></div>
+            <div class="pg-header">
+                <button class="back-btn" onclick="showPage('course')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <div class="pg-title" id="lesson-title"></div>
+                <button class="fav-btn" id="fav-btn" onclick="toggleFavorite()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+            </div>
             <div style="padding:16px 0">
                 <div class="detail-card"><div class="detail-title" id="detail-title"></div><div class="detail-meta" id="detail-meta"></div><div class="detail-text" id="detail-content"></div></div>
+                <div id="lesson-summary-box"></div>
                 <button class="complete-btn" id="complete-btn" onclick="completeLesson()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Завершить урок</span></button>
+                <div class="lesson-nav" id="lesson-nav"></div>
             </div>
         </div>
+
+        <!-- ===== FAVORITES ===== -->
+        <div id="favs-page" class="page">
+            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Избранное</div></div>
+            <div style="padding:16px 0"><div class="fav-list" id="fav-list"></div></div>
+        </div>
+
+        <div class="copy-toast" id="copy-toast">Скопировано</div>
 
         <!-- ===== MENTOR ===== -->
         <div id="mentor-page" class="page">
@@ -386,8 +459,97 @@
 
     <script>
         const tg = window.Telegram?.WebApp;
-        let user = null, allCourses = [], progress = {}, currentCourse = null, currentLesson = null, currentPlatform = null;
+        let user = null, allCourses = [], progress = {}, currentCourse = null, currentLesson = null, currentLessonIdx = 0, currentPlatform = null;
         if (tg) { tg.ready(); tg.expand(); user = tg.initDataUnsafe?.user; }
+
+        // === FAVORITES (localStorage) ===
+        function getFavs() { try { return JSON.parse(localStorage.getItem('cf_favs') || '[]'); } catch(e) { return []; } }
+        function saveFavs(favs) { localStorage.setItem('cf_favs', JSON.stringify(favs)); }
+        function toggleFavorite() {
+            if (!currentCourse || !currentLesson) return;
+            const key = currentCourse.id + '-' + currentLesson.id;
+            const favs = getFavs();
+            const idx = favs.findIndex(f => f.key === key);
+            if (idx >= 0) { favs.splice(idx, 1); } else { favs.push({ key, courseId: currentCourse.id, lessonId: currentLesson.id, title: currentLesson.title, courseTitle: currentCourse.title, ts: Date.now() }); }
+            saveFavs(favs);
+            updateFavBtn();
+            if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+        }
+        function updateFavBtn() {
+            if (!currentCourse || !currentLesson) return;
+            const key = currentCourse.id + '-' + currentLesson.id;
+            const isFav = getFavs().some(f => f.key === key);
+            document.getElementById('fav-btn').className = 'fav-btn' + (isFav ? ' active' : '');
+            document.getElementById('fav-btn').innerHTML = isFav
+                ? '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
+                : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+        }
+        function openFavs() {
+            const favs = getFavs();
+            const el = document.getElementById('fav-list');
+            if (!favs.length) { el.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--text3)"><div style="font-size:32px;margin-bottom:8px">♡</div><div style="font-size:14px">Пока пусто</div><div style="font-size:12px;margin-top:4px">Нажимай сердечко в уроках</div></div>'; showPage('favs'); return; }
+            el.innerHTML = favs.map((f, i) => '<div class="fav-item" onclick="openFavLesson(\'' + f.courseId + '\',' + f.lessonId + ')"><div class="lesson-body"><div class="lesson-name">' + f.title + '</div><div class="lesson-dur">' + f.courseTitle + '</div></div><button class="fav-remove" onclick="event.stopPropagation();removeFav(' + i + ')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>').join('');
+            showPage('favs');
+        }
+        function removeFav(i) { const favs = getFavs(); favs.splice(i, 1); saveFavs(favs); openFavs(); }
+        function openFavLesson(courseId, lessonId) {
+            currentCourse = allCourses.find(c => c.id === courseId);
+            if (!currentCourse) return;
+            const idx = currentCourse.lessons.findIndex(l => l.id === lessonId);
+            if (idx >= 0) openLesson(idx);
+        }
+
+        // === SEARCH ===
+        function doSearch(q) {
+            const el = document.getElementById('search-results');
+            if (!q || q.length < 2) { el.className = 'search-results'; return; }
+            const ql = q.toLowerCase();
+            const results = [];
+            allCourses.forEach(c => c.lessons.forEach((l, i) => {
+                if (l.title.toLowerCase().includes(ql) || l.content.toLowerCase().includes(ql) || c.title.toLowerCase().includes(ql)) {
+                    results.push({ courseId: c.id, lessonIdx: i, lessonTitle: l.title, courseTitle: c.title, color: c.color });
+                }
+            }));
+            if (!results.length) { el.innerHTML = '<div class="search-empty">Ничего не найдено</div>'; el.className = 'search-results open'; return; }
+            el.innerHTML = results.slice(0, 8).map(r => '<div class="search-item" onmousedown="searchSelect(\'' + r.courseId + '\',' + r.lessonIdx + ')"><div class="search-item-title" style="color:' + r.color + '">' + r.lessonTitle + '</div><div class="search-item-meta">' + r.courseTitle + '</div></div>').join('');
+            el.className = 'search-results open';
+        }
+        function closeSearch() { document.getElementById('search-results').className = 'search-results'; }
+        function searchSelect(courseId, lessonIdx) {
+            document.getElementById('search-input').value = '';
+            closeSearch();
+            currentCourse = allCourses.find(c => c.id === courseId);
+            if (currentCourse) {
+                currentPlatform = platforms.find(p => p.courses.includes(courseId));
+                openLesson(lessonIdx);
+            }
+        }
+
+        // === COPY CALLOUT ON TAP ===
+        function setupCopyHandlers() {
+            document.querySelectorAll('.callout').forEach(el => {
+                el.style.cursor = 'pointer';
+                el.onclick = function() {
+                    const text = this.querySelector('.callout-text')?.innerText || this.innerText;
+                    navigator.clipboard?.writeText(text).then(() => showCopyToast()).catch(() => {});
+                };
+            });
+        }
+        function showCopyToast() {
+            const t = document.getElementById('copy-toast');
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 1500);
+        }
+
+        // === CHECKLIST (localStorage) ===
+        function getChecklistState() { try { return JSON.parse(localStorage.getItem('cf_checklist') || '{}'); } catch(e) { return {}; } }
+        function saveChecklistState(s) { localStorage.setItem('cf_checklist', JSON.stringify(s)); }
+        function toggleChecklistItem(i) {
+            const s = getChecklistState();
+            s[i] = !s[i];
+            saveChecklistState(s);
+            renderChecklist();
+        }
 
         const I = {
             check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>',
@@ -480,8 +642,14 @@
             document.getElementById('tip-text').textContent = tip.x;
             try { const r = await fetch('/api/courses'); allCourses = await r.json(); renderHubs(); } catch(e) {}
             if (user) { try { const r = await fetch('/api/stats/' + user.id); progress = await r.json(); updateStats(); } catch(e) {} }
-            renderTemplates(); renderChecklist();
+            renderTemplates(); renderChecklist(); updateFavCount();
         });
+
+        function updateFavCount() {
+            const c = getFavs().length;
+            const el = document.getElementById('fav-count-label');
+            if (el) el.textContent = c ? c + ' уроков сохранено' : 'Сохранённые уроки';
+        }
 
         function svg(name) { return I[name] || ''; }
 
@@ -550,16 +718,43 @@
 
         function openLesson(i) {
             if (!currentCourse) return;
+            currentLessonIdx = i;
             currentLesson = currentCourse.lessons[i];
             document.getElementById('lesson-title').textContent = currentLesson.title;
             document.getElementById('detail-title').textContent = currentLesson.title;
             document.getElementById('detail-meta').innerHTML = svg('clock') + ' ' + currentLesson.duration;
-            document.getElementById('detail-content').innerHTML = '<p>' + currentLesson.content + '</p>';
+            document.getElementById('detail-content').innerHTML = currentLesson.content;
+            // Summary
+            const summaryBox = document.getElementById('lesson-summary-box');
+            const summaryMatch = currentLesson.content.match(/<div class="callout[^"]*"><div class="callout-title">[^<]*<\/div><div class="callout-text">([^<]*(?:<[^>]*>[^<]*)*)<\/div><\/div>/);
+            const stepsMatch = currentLesson.content.match(/<ol class="steps">(.*?)<\/ol>/s);
+            let summaryHtml = '<div class="lesson-summary"><div class="lesson-summary-title">✓ Запомни главное</div><ul>';
+            if (stepsMatch) {
+                const items = stepsMatch[1].match(/<li>(.*?)<\/li>/g);
+                if (items) items.slice(0, 3).forEach(li => {
+                    const txt = li.replace(/<[^>]*>/g, '').substring(0, 80);
+                    summaryHtml += '<li>' + txt + '</li>';
+                });
+            }
+            summaryHtml += '</ul></div>';
+            summaryBox.innerHTML = summaryHtml;
+            // Fav button
+            updateFavBtn();
+            // Complete button
             const done = progress.completedLessons && progress.completedLessons.includes(currentCourse.id + '-' + currentLesson.id);
             const btn = document.getElementById('complete-btn');
             btn.querySelector('span').textContent = done ? 'Пройдено' : 'Завершить урок';
             btn.className = 'complete-btn' + (done ? ' done' : '');
+            // Prev/Next nav
+            const nav = document.getElementById('lesson-nav');
+            const total = currentCourse.lessons.length;
+            let navHtml = '';
+            if (i > 0) navHtml += '<button class="nav-lesson-btn" onclick="openLesson(' + (i-1) + ')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>' + currentCourse.lessons[i-1].title + '</button>';
+            if (i < total - 1) navHtml += '<button class="nav-lesson-btn" onclick="openLesson(' + (i+1) + ')">' + currentCourse.lessons[i+1].title + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>';
+            nav.innerHTML = navHtml;
             showPage('lesson');
+            // Setup copy handlers after DOM update
+            setTimeout(setupCopyHandlers, 50);
         }
 
         async function completeLesson() {
@@ -623,7 +818,14 @@
             document.getElementById('templates-output').innerHTML = templates.map(t => '<div class="course-card" style="cursor:default;margin-bottom:8px" onclick="showAlert(\'' + t.desc.replace(/'/g,"\\'") + '\')"><div class="course-top"><div class="course-name">' + svg('file') + ' ' + t.title + '</div><span class="lvl lvl-2">' + t.tag + '</span></div><div class="course-sub">' + t.desc + '</div></div>').join('');
         }
         function renderChecklist() {
-            document.getElementById('checklist-output').innerHTML = '<div style="margin-bottom:12px;color:var(--text2);font-size:13px">Нажми на пункт, чтобы отметить</div>' + checklist.map((c, i) => '<div class="course-card" style="cursor:pointer;margin-bottom:8px" onclick="this.querySelector(\'.lesson-num\').style.background=this.querySelector(\'.lesson-num\').style.background===\'var(--accent)\'?\'var(--bg2)\':\'var(--accent)\';this.querySelector(\'.lesson-num\').style.color=this.querySelector(\'.lesson-num\').style.color===\'#000\'?\'var(--text)\':\'#000\'"><div class="lesson-num" style="width:32px;height:32px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0">' + svg('check') + '</div><div class="lesson-body"><div class="lesson-name">' + (i+1) + '. ' + c.q + '</div></div></div>').join('');
+            const state = getChecklistState();
+            const done = Object.values(state).filter(Boolean).length;
+            document.getElementById('checklist-output').innerHTML =
+                '<div style="margin-bottom:12px;color:var(--text2);font-size:13px;display:flex;justify-content:space-between;align-items:center"><span>Нажми на пункт, чтобы отметить</span><span style="color:var(--accent);font-weight:600">' + done + '/' + checklist.length + '</span></div>' +
+                checklist.map((c, i) => {
+                    const checked = state[i];
+                    return '<div class="course-card" style="cursor:pointer;margin-bottom:8px;border' + (checked ? '-color:rgba(16,185,129,0.2)' : '') + '" onclick="toggleChecklistItem(' + i + ')"><div class="lesson-num" style="width:32px;height:32px;border-radius:8px;background:' + (checked ? 'var(--green)' : 'var(--bg2)') + ';display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;color:' + (checked ? '#000' : 'var(--text)') + '">' + svg('check') + '</div><div class="lesson-body"><div class="lesson-name" style="' + (checked ? 'text-decoration:line-through;opacity:0.5' : '') + '">' + (i+1) + '. ' + c.q + '</div></div></div>';
+                }).join('');
         }
 
         function showPage(page) {
