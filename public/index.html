@@ -22,83 +22,46 @@
         .avatar-btn svg { width: 18px; height: 18px; color: var(--text2); }
 
         /* === WELCOME === */
-        .welcome { padding: 24px 0 8px; }
-        .welcome h1 { font-size: 24px; font-weight: 800; line-height: 1.25; margin-bottom: 6px; }
+        .welcome { padding: 20px 0 8px; }
+        .welcome h1 { font-size: 22px; font-weight: 800; line-height: 1.3; margin-bottom: 6px; }
         .welcome h1 span { color: var(--accent); }
-        .welcome p { color: var(--text2); font-size: 14px; line-height: 1.5; }
+        .welcome p { color: var(--text2); font-size: 13px; line-height: 1.5; }
 
-        /* === STATS ROW === */
-        .stats-row { display: flex; gap: 10px; margin: 20px 0; }
-        .stat-pill { flex: 1; background: var(--bg3); border-radius: var(--radius-sm); padding: 14px 12px; text-align: center; border: 1px solid rgba(255,255,255,0.03); }
-        .stat-pill-icon { width: 20px; height: 20px; margin: 0 auto 6px; color: var(--accent); opacity: 0.7; }
-        .stat-pill-val { font-size: 20px; font-weight: 700; }
-        .stat-pill-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
+        /* === BASE BUTTON === */
+        .base-btn { width: 100%; padding: 18px; border-radius: var(--radius); background: linear-gradient(135deg, #c9a84c, #a08630); border: none; color: #000; font-size: 17px; font-weight: 800; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 10px; margin: 16px 0; letter-spacing: -0.3px; }
+        .base-btn:active { transform: scale(0.98); }
+        .base-btn svg { width: 22px; height: 22px; }
 
-        /* === STREAK === */
-        .streak-bar { display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03)); border: 1px solid rgba(201,168,76,0.12); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px; }
-        .streak-fire { font-size: 24px; }
-        .streak-text { flex: 1; }
-        .streak-text strong { font-size: 14px; font-weight: 700; }
-        .streak-text p { font-size: 12px; color: var(--text2); margin-top: 1px; }
+        /* === PLATFORM HUBS === */
+        .hubs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+        .hub-card { background: var(--bg3); border-radius: var(--radius); padding: 18px 14px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); text-align: center; position: relative; overflow: hidden; }
+        .hub-card:active { transform: scale(0.97); background: var(--bg4); }
+        .hub-icon { width: 48px; height: 48px; border-radius: 14px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
+        .hub-icon svg { width: 26px; height: 26px; }
+        .hub-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+        .hub-desc { font-size: 11px; color: var(--text2); line-height: 1.3; }
+        .hub-count { font-size: 10px; color: var(--text3); margin-top: 6px; }
+
+        /* === STATS === */
+        .stats-row { display: flex; gap: 8px; margin: 16px 0; }
+        .stat-pill { flex: 1; background: var(--bg3); border-radius: var(--radius-sm); padding: 12px 8px; text-align: center; border: 1px solid rgba(255,255,255,0.03); }
+        .stat-pill-icon { width: 18px; height: 18px; margin: 0 auto 4px; color: var(--accent); opacity: 0.7; }
+        .stat-pill-val { font-size: 18px; font-weight: 700; }
+        .stat-pill-label { font-size: 10px; color: var(--text2); margin-top: 2px; }
 
         /* === SECTION === */
-        .section { margin-bottom: 24px; }
+        .section { margin-bottom: 20px; }
         .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
         .section-title { font-size: 16px; font-weight: 700; }
-        .section-more { font-size: 12px; color: var(--accent); cursor: pointer; font-weight: 500; }
 
-        /* === RECOMMENDED === */
-        .reco-card { background: linear-gradient(135deg, #1a1810, #151510); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius); padding: 18px; margin-bottom: 20px; cursor: pointer; position: relative; overflow: hidden; }
-        .reco-card:active { transform: scale(0.98); }
-        .reco-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(201,168,76,0.15); color: var(--accent2); padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
-        .reco-badge svg { width: 12px; height: 12px; }
-        .reco-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
-        .reco-desc { font-size: 13px; color: var(--text2); line-height: 1.4; margin-bottom: 14px; }
-        .reco-meta { display: flex; align-items: center; gap: 14px; }
-        .reco-meta-item { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
-        .reco-meta-item svg { width: 12px; height: 12px; }
-        .reco-glow { position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 70%); border-radius: 50%; }
-
-        /* === LEVEL BADGES === */
-        .level-badge { display: inline-flex; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
-        .level-start { background: rgba(16,185,129,0.12); color: #34d399; }
-        .level-grow { background: rgba(201,168,76,0.12); color: var(--accent2); }
-        .level-master { background: rgba(139,92,246,0.12); color: #a78bfa; }
-
-        /* === COURSE CARDS === */
-        .courses-list { display: flex; flex-direction: column; gap: 10px; }
-        .course-card { background: var(--bg3); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; display: flex; gap: 14px; align-items: flex-start; }
-        .course-card:active { transform: scale(0.98); background: var(--bg4); }
-        .course-card-accent { position: absolute; top: 0; left: 0; width: 3px; height: 100%; border-radius: 3px 0 0 3px; }
-        .course-icon-wrap { width: 46px; height: 46px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .course-icon-wrap svg { width: 22px; height: 22px; }
-        .course-body { flex: 1; min-width: 0; }
-        .course-top { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
-        .course-name { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .course-sub { font-size: 12px; color: var(--text2); margin-bottom: 10px; line-height: 1.3; }
-        .course-bottom { display: flex; align-items: center; gap: 12px; }
-        .course-stat { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
-        .course-stat svg { width: 12px; height: 12px; opacity: 0.5; }
-        .course-progress { width: 100%; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 10px; overflow: hidden; }
-        .course-progress-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
-
-        /* === PLATFORM FILTER === */
-        .platforms-row { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 8px; -webkit-overflow-scrolling: touch; }
-        .platforms-row::-webkit-scrollbar { display: none; }
-        .plat-chip { flex-shrink: 0; padding: 8px 16px; border-radius: 20px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.04); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 6px; color: var(--text2); }
-        .plat-chip:active { transform: scale(0.96); }
-        .plat-chip.active { background: var(--accent); border-color: var(--accent); color: #000; }
-        .plat-chip svg { width: 14px; height: 14px; }
-
-        /* === TOOLS GRID === */
-        .tools-list { display: flex; flex-direction: column; gap: 10px; }
-        .tool-row { display: flex; gap: 10px; }
-        .tool-card { flex: 1; background: var(--bg3); border-radius: var(--radius); padding: 18px 14px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); text-align: center; }
+        /* === TOOLS === */
+        .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .tool-card { background: var(--bg3); border-radius: var(--radius); padding: 16px 12px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); text-align: center; }
         .tool-card:active { transform: scale(0.97); background: var(--bg4); }
-        .tool-icon { width: 42px; height: 42px; border-radius: 14px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
-        .tool-icon svg { width: 22px; height: 22px; }
-        .tool-name { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
-        .tool-sub { font-size: 11px; color: var(--text2); line-height: 1.3; }
+        .tool-icon { width: 40px; height: 40px; border-radius: 12px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; }
+        .tool-icon svg { width: 20px; height: 20px; }
+        .tool-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+        .tool-sub { font-size: 11px; color: var(--text2); }
 
         /* === TIP === */
         .tip-card { background: var(--bg3); border-radius: var(--radius); padding: 16px 18px; border-left: 3px solid var(--accent); }
@@ -106,20 +69,43 @@
         .tip-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
         .tip-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
 
-        /* === LESSON === */
+        /* === PLATFORM PAGE === */
+        .platform-hero { text-align: center; padding: 24px 0 16px; }
+        .platform-hero-icon { width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; }
+        .platform-hero-icon svg { width: 32px; height: 32px; }
+        .platform-hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+        .platform-hero p { font-size: 13px; color: var(--text2); line-height: 1.4; max-width: 300px; margin: 0 auto; }
+
+        .course-list { display: flex; flex-direction: column; gap: 10px; }
+        .course-card { background: var(--bg3); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; }
+        .course-card:active { transform: scale(0.98); background: var(--bg4); }
+        .course-accent { position: absolute; top: 0; left: 0; width: 3px; height: 100%; border-radius: 3px 0 0 3px; }
+        .course-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .course-name { font-size: 15px; font-weight: 700; flex: 1; }
+        .course-sub { font-size: 12px; color: var(--text2); line-height: 1.4; margin-bottom: 10px; }
+        .course-bottom { display: flex; align-items: center; gap: 12px; }
+        .course-stat { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
+        .course-stat svg { width: 12px; height: 12px; opacity: 0.5; }
+        .course-progress { width: 100%; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+        .course-progress-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+
+        /* === LEVEL BADGES === */
+        .lvl { display: inline-flex; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .lvl-1 { background: rgba(16,185,129,0.12); color: #34d399; }
+        .lvl-2 { background: rgba(201,168,76,0.12); color: var(--accent2); }
+        .lvl-3 { background: rgba(139,92,246,0.12); color: #a78bfa; }
+
+        /* === LESSONS === */
         .lesson-list { display: flex; flex-direction: column; gap: 8px; }
         .lesson-item { background: var(--bg3); border-radius: var(--radius-sm); padding: 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); }
         .lesson-item:active { transform: scale(0.98); }
-        .lesson-item.completed { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.05); }
+        .lesson-item.done { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.05); }
         .lesson-num { width: 32px; height: 32px; border-radius: var(--radius-xs); background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
-        .lesson-item.completed .lesson-num { background: var(--accent); color: #000; }
+        .lesson-item.done .lesson-num { background: var(--accent); color: #000; }
         .lesson-body { flex: 1; }
         .lesson-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
         .lesson-dur { font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 4px; }
         .lesson-dur svg { width: 12px; height: 12px; opacity: 0.5; }
-        .lesson-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
-        .lesson-item.completed .lesson-check { background: var(--accent); border-color: var(--accent); }
-        .lesson-item.completed .lesson-check svg { width: 11px; height: 11px; color: #000; }
 
         /* === DETAIL === */
         .detail-card { background: var(--bg3); border-radius: var(--radius); padding: 22px; margin: 16px 0; }
@@ -133,7 +119,7 @@
         .complete-btn.done { background: var(--bg3); color: var(--accent); border: 1px solid rgba(201,168,76,0.25); }
         .complete-btn svg { width: 18px; height: 18px; }
 
-        /* === HEADER NAV === */
+        /* === PG HEADER === */
         .pg-header { padding: 16px 0; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); position: sticky; top: 0; background: var(--bg); z-index: 10; }
         .back-btn { width: 36px; height: 36px; border-radius: var(--radius-xs); background: var(--bg3); border: none; color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .back-btn svg { width: 18px; height: 18px; }
@@ -177,14 +163,11 @@
         .nav-btn.active { background: var(--accent); color: #000; }
         .nav-btn svg { width: 16px; height: 16px; }
 
-        /* === ANIMATIONS === */
+        /* === ANIM === */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .anim { animation: fadeIn 0.3s ease forwards; }
         .loading-dots::after { content: ''; animation: dots 1.5s infinite; }
         @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60%, 100% { content: '...'; } }
-
-        /* === EMPTY STATE === */
-        .empty-hint { text-align: center; padding: 20px; color: var(--text3); font-size: 13px; }
     </style>
 </head>
 <body>
@@ -199,14 +182,14 @@
             </div>
 
             <div class="welcome anim">
-                <h1 id="welcome-text">Научим делать <span>контент</span>, который зарабатывает</h1>
-                <p id="welcome-sub">12 курсов, AI-наставник и готовые инструменты — всё бесплатно</p>
+                <h1>Научим делать <span>контент</span>, который зарабатывает</h1>
+                <p>Выбери соцсеть и начни учиться — всё бесплатно</p>
             </div>
 
-            <div class="streak-bar anim" id="streak-bar" style="display:none">
-                <div class="streak-fire">🔥</div>
-                <div class="streak-text"><strong id="streak-count">0 дней подряд</strong><p>Продолжай учиться!</p></div>
-            </div>
+            <button class="base-btn anim" onclick="openPlatform('base')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Это база — начни с этого
+            </button>
 
             <div class="stats-row anim" id="stats-row" style="display:none">
                 <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><div class="stat-pill-val" id="lessons-done">0</div><div class="stat-pill-label">уроков</div></div>
@@ -214,53 +197,33 @@
                 <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg><div class="stat-pill-val" id="level-count">1</div><div class="stat-pill-label">уровень</div></div>
             </div>
 
-            <div class="section anim" id="reco-section">
-                <div class="section-head"><div class="section-title">Начни с этого</div></div>
-                <div class="reco-card" onclick="openCourse('ig-reels')">
-                    <div class="reco-glow"></div>
-                    <div class="reco-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Рекомендуем</div>
-                    <div class="reco-title">Reels для Instagram</div>
-                    <div class="reco-desc">Самый быстрый способ набрать подписчиков. Научись делать вирусные видео с нуля.</div>
-                    <div class="reco-meta">
-                        <div class="reco-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~50 мин</div>
-                        <div class="reco-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>10 уроков</div>
-                        <span class="level-badge level-start">Старт</span>
-                    </div>
-                </div>
-            </div>
-
             <div class="section anim">
-                <div class="section-head"><div class="section-title">Курсы</div><div class="section-more" onclick="filterPlatform('all')">Все</div></div>
-                <div class="platforms-row" id="platforms-scroll"></div>
-                <div class="courses-list" id="courses-grid"></div>
+                <div class="section-head"><div class="section-title">Выбери соцсеть</div></div>
+                <div class="hubs-grid" id="hubs-grid"></div>
             </div>
 
             <div class="section anim">
                 <div class="section-head"><div class="section-title">Инструменты</div></div>
-                <div class="tools-list">
-                    <div class="tool-row">
-                        <div class="tool-card" onclick="showPage('mentor')">
-                            <div class="tool-icon" style="background:rgba(201,168,76,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-                            <div class="tool-name">Задать вопрос</div>
-                            <div class="tool-sub">AI-наставник ответит</div>
-                        </div>
-                        <div class="tool-card" onclick="openTool('ideas')">
-                            <div class="tool-icon" style="background:rgba(16,185,129,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></div>
-                            <div class="tool-name">Генератор идей</div>
-                            <div class="tool-sub">8 ниш, 64 темы</div>
-                        </div>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="showPage('mentor')">
+                        <div class="tool-icon" style="background:rgba(201,168,76,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                        <div class="tool-name">Задать вопрос</div>
+                        <div class="tool-sub">AI-наставник</div>
                     </div>
-                    <div class="tool-row">
-                        <div class="tool-card" onclick="openTool('templates')">
-                            <div class="tool-icon" style="background:rgba(139,92,246,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-                            <div class="tool-name">Шаблоны</div>
-                            <div class="tool-sub">Готовые тексты и формулы</div>
-                        </div>
-                        <div class="tool-card" onclick="openTool('checklist')">
-                            <div class="tool-icon" style="background:rgba(239,68,68,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-                            <div class="tool-name">Чеклист</div>
-                            <div class="tool-sub">Проверь пост перед публикацией</div>
-                        </div>
+                    <div class="tool-card" onclick="openTool('ideas')">
+                        <div class="tool-icon" style="background:rgba(16,185,129,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></div>
+                        <div class="tool-name">Идеи</div>
+                        <div class="tool-sub">64 темы</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('templates')">
+                        <div class="tool-icon" style="background:rgba(139,92,246,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                        <div class="tool-name">Шаблоны</div>
+                        <div class="tool-sub">Готовые формулы</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('checklist')">
+                        <div class="tool-icon" style="background:rgba(239,68,68,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                        <div class="tool-name">Чеклист</div>
+                        <div class="tool-sub">Проверь пост</div>
                     </div>
                 </div>
             </div>
@@ -275,9 +238,15 @@
             </div>
         </div>
 
+        <!-- ===== PLATFORM PAGE ===== -->
+        <div id="platform-page" class="page">
+            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title" id="platform-title"></div></div>
+            <div id="platform-content"></div>
+        </div>
+
         <!-- ===== COURSE ===== -->
         <div id="course-page" class="page">
-            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title" id="course-title"></div></div>
+            <div class="pg-header"><button class="back-btn" id="course-back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title" id="course-title"></div></div>
             <div style="padding:16px 0"><div class="lesson-list" id="lesson-list"></div></div>
         </div>
 
@@ -295,13 +264,12 @@
             <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Наставник</div></div>
             <div class="chat-wrap">
                 <div class="chat-msgs" id="chat-messages">
-                    <div class="chat-msg ai"><span class="ai-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V22l4-3h3a8 8 0 0 0 0-16z"/></svg>Наставник</span>Привет! Я помогу разобраться в контенте. Спроси про Reels, YouTube, TikTok, заработок или что угодно!</div>
+                    <div class="chat-msg ai"><span class="ai-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V22l4-3h3a8 8 0 0 0 0-16z"/></svg>Наставник</span>Привет! Спроси что угодно про контент, соцсети или заработок.</div>
                     <div class="quick-questions">
                         <div class="quick-q" onclick="sendQuick('Как сделать вирусный Reels?')">Reels</div>
                         <div class="quick-q" onclick="sendQuick('Как начать YouTube?')">YouTube</div>
                         <div class="quick-q" onclick="sendQuick('Как заработать на контенте?')">Заработок</div>
                         <div class="quick-q" onclick="sendQuick('Как расти в TikTok?')">TikTok</div>
-                        <div class="quick-q" onclick="sendQuick('Какие инструменты бесплатные?')">Инструменты</div>
                     </div>
                 </div>
                 <div class="chat-input-row">
@@ -316,7 +284,7 @@
             <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Генератор идей</div></div>
             <div style="padding:16px 0">
                 <div class="section-title" style="margin-bottom:12px">Выбери нишу</div>
-                <div class="quick-questions" id="niche-btns">
+                <div class="quick-questions">
                     <div class="quick-q" onclick="genIdeas('кулинария')">Кулинария</div>
                     <div class="quick-q" onclick="genIdeas('путешествия')">Путешествия</div>
                     <div class="quick-q" onclick="genIdeas('мода')">Мода</div>
@@ -329,12 +297,10 @@
                 <div id="ideas-output"></div>
             </div>
         </div>
-
         <div id="templates-page" class="page">
             <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Шаблоны</div></div>
             <div style="padding:16px 0" id="templates-output"></div>
         </div>
-
         <div id="checklist-page" class="page">
             <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Чеклист</div></div>
             <div style="padding:16px 0" id="checklist-output"></div>
@@ -362,7 +328,6 @@
         </div>
     </div>
 
-    <!-- ===== BOTTOM NAV ===== -->
     <div class="bottom-nav">
         <div class="nav-items">
             <button class="nav-btn active" onclick="showPage('home')" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Главная</button>
@@ -373,55 +338,57 @@
 
     <script>
         const tg = window.Telegram?.WebApp;
-        let user = null, allCourses = [], progress = {}, currentCourse = null, currentLesson = null, activeFilter = 'all';
+        let user = null, allCourses = [], progress = {}, currentCourse = null, currentLesson = null, currentPlatform = null;
         if (tg) { tg.ready(); tg.expand(); user = tg.initDataUnsafe?.user; }
 
-        const SVG_ICONS = {
-            book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
-            check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>',
-            clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-            fire: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c0 4-4 6-4 10a4 4 0 1 0 8 0c0-4-4-6-4-10z"/></svg>',
-            lightbulb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>',
-            file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
-            instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
-            youtube: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>',
-            tiktok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>',
-            bot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V22l4-3h3a8 8 0 0 0 0-16z"/><circle cx="8" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="10" r="1" fill="currentColor"/><circle cx="16" cy="10" r="1" fill="currentColor"/></svg>',
-            chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
-            play: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
-            briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
-            target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
-            gift: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
-            star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
-            sparkle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>',
-            zap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
-            users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-            funnel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>',
-            send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
-            all: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>'
+        const I = {
+            check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>',
+            clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+            book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+            instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
+            youtube:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>',
+            tiktok:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>',
+            send:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+            sparkle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>',
+            chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+            play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+            bot:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V22l4-3h3a8 8 0 0 0 0-16z"/><circle cx="8" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="10" r="1" fill="currentColor"/><circle cx="16" cy="10" r="1" fill="currentColor"/></svg>',
+            target:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+            gift:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
+            star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+            lightbulb:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>',
+            file:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+            funnel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>',
+            briefcase:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>'
         };
 
-        const platformIcons = { all: 'all', instagram: 'instagram', youtube: 'youtube', tiktok: 'tiktok', telegram: 'send', ai: 'sparkle', general: 'chart' };
-        const courseIcons = { 'ig-reels': 'play', 'ig-carousels': 'gift', 'ig-stories': 'instagram', 'ig-growth': 'chart', 'yt-basics': 'youtube', 'yt-shorts': 'play', 'tiktok-viral': 'tiktok', 'tiktok-business': 'briefcase', 'tg-channel': 'send', 'sales-funnels': 'funnel', 'ai-content': 'bot', 'ai-prompts': 'sparkle', 'monetization': 'gift', 'content-strategy': 'target', 'design-basics': 'star' };
-        const courseLevel = { 'ig-reels': 'start', 'ig-carousels': 'start', 'ig-stories': 'start', 'ig-growth': 'grow', 'yt-basics': 'start', 'yt-shorts': 'start', 'tiktok-viral': 'start', 'tiktok-business': 'grow', 'tg-channel': 'start', 'sales-funnels': 'master', 'ai-content': 'grow', 'ai-prompts': 'grow', 'monetization': 'master', 'content-strategy': 'grow', 'design-basics': 'start' };
-        const levelLabels = { start: 'Старт', grow: 'Рост', master: 'Мастер' };
+        const platforms = [
+            { id:'instagram', name:'Instagram', desc:'Reels, карусели, Stories, рост подписчиков', icon:'instagram', color:'#E1306C', courses:['ig-reels','ig-carousels','ig-stories','ig-growth'] },
+            { id:'youtube', name:'YouTube', desc:'Длинные видео, Shorts, монетизация', icon:'youtube', color:'#FF0000', courses:['yt-basics','yt-shorts'] },
+            { id:'tiktok', name:'TikTok', desc:'Вирусные видео, бизнес в TikTok', icon:'tiktok', color:'#010101', courses:['tiktok-viral','tiktok-business'] },
+            { id:'telegram', name:'Telegram', desc:'Канал, боты, монетизация', icon:'send', color:'#0088CC', courses:['tg-channel'] },
+            { id:'base', name:'Общее', desc:'Стратегия, монетизация, дизайн', icon:'chart', color:'#10B981', courses:['content-strategy','monetization','design-basics'] },
+            { id:'ai', name:'AI-инструменты', desc:'Нейросети для контента и промпты', icon:'sparkle', color:'#6366F1', courses:['ai-content','ai-prompts'] }
+        ];
+
+        const courseIcons = { 'ig-reels':'play', 'ig-carousels':'gift', 'ig-stories':'instagram', 'ig-growth':'chart', 'yt-basics':'youtube', 'yt-shorts':'play', 'tiktok-viral':'tiktok', 'tiktok-business':'briefcase', 'tg-channel':'send', 'sales-funnels':'funnel', 'ai-content':'bot', 'ai-prompts':'sparkle', 'monetization':'gift', 'content-strategy':'target', 'design-basics':'star' };
+        const courseLevel = { 'ig-reels':1, 'ig-carousels':1, 'ig-stories':1, 'ig-growth':2, 'yt-basics':1, 'yt-shorts':1, 'tiktok-viral':1, 'tiktok-business':2, 'tg-channel':1, 'sales-funnels':3, 'ai-content':2, 'ai-prompts':2, 'monetization':3, 'content-strategy':2, 'design-basics':1 };
+        const lvlNames = { 1:'Старт', 2:'Рост', 3:'Мастер' };
 
         const tips = [
             {t:'Хук в первые 2 секунды', x:'Начинай с вопроса, шокирующего факта или необычного кадра — иначе листнут.'},
-            {t:'Сохранения > Лайков', x:'В 2026 году Instagram продвигает контент, который сохраняют и пересылают. Давай пользу.'},
-            {t:'Сценарий важнее камеры', x:'Говори не про себя, а про боли аудитории. Лучший контент = адаптация того, что уже зашло.'},
-            {t:'Правило 70/30', x:'70% полезного контента, 30% личного/продаваемого. Иначе аудитория уйдёт.'},
+            {t:'Сохранения > Лайков', x:'В 2026 году Instagram продвигает контент, который сохраняют и пересылают.'},
+            {t:'Правило 70/30', x:'70% полезного контента, 30% продаж. Иначе аудитория уйдёт.'},
+            {t:'Сценарий важнее камеры', x:'Говори про боли аудитории, а не про себя. Лучший контент = адаптация того, что уже зашло.'},
             {t:'Ресайкл = экономия', x:'Одно видео → Reels + TikTok + Shorts + пост + Stories. 70% экономии времени.'},
             {t:'Воронка > Охваты', x:'Без связки "контент → воронка → оффер → продажа" охваты = ноль денег.'},
-            {t:'Комментируй в своей нише', x:'20-30 комментариев в день под чужими постами = трафик к тебе в профиль.'},
-            {t:'Серийный контент', x:'Делай мини-сериалы: часть 1, часть 2... Люди подписываются, чтобы не пропустить.'},
-            {t:'AI экономит 3 часа', x:'ChatGPT для идей и текстов, Midjourney для картинок. Используй — это бесплатно.'},
-            {t:'Прайм-тайм', x:'Публикуй за 30 мин до пика: 12:00-14:00 и 18:00-21:00.'}
+            {t:'Прайм-тайм', x:'Публикуй за 30 мин до пика: 12:00-14:00 и 18:00-21:00.'},
+            {t:'Серийный контент', x:'Делай мини-сериалы: часть 1, часть 2... Люди подписываются, чтобы не пропустить.'}
         ];
 
         const ideasDB = {
-            'кулинария': ['5 блюд за 15 минут','Рецепт дня: завтрак','Что я ем за день','Рецепт из остатков в холодильнике','Бюджетное питание на неделю','Сравнение: домашнее vs магазинное','Как красиво подать блюдо','Лайфхак для кухни'],
-            'путешествия': ['10 мест которые стоит увидеть','Бюджетное путешествие','Что взять в дорогу','Лайфхаки для путешественников','Скрытые места','Путешествие за 1000₽','Путешествие на выходные','Что не стоит делать в путешествии'],
+            'кулинария': ['5 блюд за 15 минут','Рецепт дня: завтрак','Что я ем за день','Рецепт из остатков','Бюджетное питание на неделю','Сравнение: домашнее vs магазинное','Как красиво подать блюдо','Лайфхак для кухни'],
+            'путешествия': ['10 мест которые стоит увидеть','Бюджетное путешествие','Что взять в дорогу','Лайфхаки для путешественников','Скрытые места','Путешествие за 1000₽','Путешествие на выходные','Что не стоит делать'],
             'мода': ['Образ дня','Capsule wardrobe за 10 вещей','Тренды сезона','Стиль за маленькие деньги','Лайфхаки для гардероба','Что надеть на...','Разбор гардероба','До/после стилизации'],
             'технологии': ['Обзор гаджета','Топ-5 приложений','Лайфхак для телефона','Что нового в IT','Как автоматизировать','Бесплатные инструменты','Обзор софта','Сравнение гаджетов'],
             'фитнес': ['Тренировка за 10 минут','Что есть до/после тренировки','Упражнения дома','Прогресс за месяц','Лайфхаки для похудения','Растяжка','Мотивация','Типичные ошибки'],
@@ -438,11 +405,8 @@
             {title:'CTA (призыв)', desc:'"Подпишись / Сохрани / Напиши в комментах"', tag:'Все'},
             {title:'Продающий пост', desc:'Проблема → Решение → Как получить → Ссылка', tag:'Продажи'},
             {title:'Сторителлинг', desc:'Герой → Проблема → Путь → Результат → Мораль', tag:'История'},
-            {title:'Обзор/Отзыв', desc:'Что это → Впечатления → Плюсы/Минусы → Вердикт', tag:'Обзор'},
-            {title:'Автоворонка (Телеграм)', desc:'Лид-магнит → Бот → Прогрев → Продажа', tag:'Telegram'},
             {title:'Карусель-лекция', desc:'Слайд 1: Хук → Слайды 2-8: Советы → Слайд 9: CTA', tag:'Instagram'},
-            {title:'AI-промпт для контента', desc:'"Напиши пост для [ниши] на тему [тема] в стиле [тон]"', tag:'AI'},
-            {title:'Системный запуск', desc:'Тизер → Анонс → Открытие → Напоминание → Старт', tag:'Запуск'}
+            {title:'AI-промпт', desc:'"Напиши пост для [ниши] на тему [тема] в стиле [тон]"', tag:'AI'}
         ];
 
         const checklist = [
@@ -454,10 +418,8 @@
             {q:'CTA в конце (подписка/комментарий)?'},
             {q:'3-5 хештегов добавлены?'},
             {q:'Подпись интригует или задаёт вопрос?'},
-            {q:'Репост в Stories?'},
-            {q:'Публикуешь в прайм-тайм?'},
             {q:'Говоришь про боли аудитории, а не про себя?'},
-            {q:'Есть ссылка на воронку (Telegram/сайт)?'}
+            {q:'Публикуешь в прайм-тайм?'}
         ];
 
         document.addEventListener('DOMContentLoaded', async () => {
@@ -468,56 +430,72 @@
             const tip = tips[Math.floor(Math.random() * tips.length)];
             document.getElementById('tip-title').textContent = tip.t;
             document.getElementById('tip-text').textContent = tip.x;
-            try { const r = await fetch('/api/courses'); allCourses = await r.json(); renderPlatforms(); renderCourses(); } catch(e) {}
-            if (user) {
-                try { const r = await fetch('/api/stats/' + user.id); progress = await r.json(); updateStats(); } catch(e) {}
-            }
-            renderTemplates();
-            renderChecklist();
+            try { const r = await fetch('/api/courses'); allCourses = await r.json(); renderHubs(); } catch(e) {}
+            if (user) { try { const r = await fetch('/api/stats/' + user.id); progress = await r.json(); updateStats(); } catch(e) {} }
+            renderTemplates(); renderChecklist();
         });
 
-        function svg(name) { return SVG_ICONS[name] || ''; }
+        function svg(name) { return I[name] || ''; }
 
-        function renderPlatforms() {
-            const s = document.getElementById('platforms-scroll');
-            const p = [{id:'all',n:'Все'},{id:'instagram',n:'Instagram'},{id:'youtube',n:'YouTube'},{id:'tiktok',n:'TikTok'},{id:'telegram',n:'Telegram'},{id:'ai',n:'AI'},{id:'general',n:'Общее'}];
-            s.innerHTML = p.map(x => '<div class="plat-chip ' + (x.id===activeFilter?'active':'') + '" onclick="filterPlatform(\'' + x.id + '\')">' + svg(platformIcons[x.id]) + ' ' + x.n + '</div>').join('');
+        function renderHubs() {
+            const g = document.getElementById('hubs-grid');
+            g.innerHTML = platforms.map(p => {
+                const count = p.courses.length;
+                const done = p.courses.reduce((sum, cid) => {
+                    const c = allCourses.find(x => x.id === cid);
+                    if (!c) return sum;
+                    return sum + c.lessons.filter(l => progress.completedLessons && progress.completedLessons.includes(cid + '-' + l.id)).length;
+                }, 0);
+                const total = p.courses.reduce((sum, cid) => { const c = allCourses.find(x => x.id === cid); return c ? sum + c.lessons.length : sum; }, 0);
+                return '<div class="hub-card anim" onclick="openPlatform(\'' + p.id + '\')">' +
+                    '<div class="hub-icon" style="background:' + p.color + '18;">' + svg(p.icon) + '</div>' +
+                    '<div class="hub-name">' + p.name + '</div>' +
+                    '<div class="hub-desc">' + p.desc + '</div>' +
+                    '<div class="hub-count">' + done + '/' + total + ' уроков</div>' +
+                    '</div>';
+            }).join('');
         }
 
-        function filterPlatform(id) { activeFilter = id; renderPlatforms(); renderCourses(); }
-
-        function renderCourses() {
-            const g = document.getElementById('courses-grid');
-            const f = activeFilter === 'all' ? allCourses : allCourses.filter(c => c.platform === activeFilter);
-            g.innerHTML = f.map((c, i) => {
+        function openPlatform(id) {
+            currentPlatform = platforms.find(p => p.id === id);
+            if (!currentPlatform) return;
+            document.getElementById('platform-title').textContent = currentPlatform.name;
+            const courses = currentPlatform.courses.map(cid => allCourses.find(c => c.id === cid)).filter(Boolean);
+            let html = '<div class="platform-hero">' +
+                '<div class="platform-hero-icon" style="background:' + currentPlatform.color + '18;">' + svg(currentPlatform.icon) + '</div>' +
+                '<h2>' + currentPlatform.name + '</h2>' +
+                '<p>' + currentPlatform.desc + '</p></div>';
+            if (id === 'base') {
+                html += '<div style="background:var(--bg3);border-radius:var(--radius);padding:16px;margin:0 0 16px;border:1px solid rgba(201,168,76,0.15);">' +
+                    '<div style="font-size:14px;font-weight:700;margin-bottom:6px;">С чего начать?</div>' +
+                    '<div style="font-size:13px;color:var(--text2);line-height:1.5;">Эти курсы дают общую базу — стратегия, монетизация и дизайн. Начни с "Контент-стратегии", затем "Монетизация" и "Дизайн".</div></div>';
+            }
+            html += '<div class="course-list">' + courses.map(c => {
                 const done = c.lessons.filter(l => progress.completedLessons && progress.completedLessons.includes(c.id + '-' + l.id)).length;
                 const pct = (done / c.lessons.length) * 100;
-                const iconKey = courseIcons[c.id] || 'book';
-                const lvl = courseLevel[c.id] || 'start';
-                const lvlLabel = levelLabels[lvl];
-                const lvlClass = 'level-' + lvl;
-                return '<div class="course-card anim" style="animation-delay:' + (i*.04) + 's" onclick="openCourse(\'' + c.id + '\')">' +
-                    '<div class="course-card-accent" style="background:' + c.color + '"></div>' +
-                    '<div class="course-icon-wrap" style="background:' + c.color + '18;">' + svg(iconKey) + '</div>' +
-                    '<div class="course-body">' +
-                        '<div class="course-top"><div class="course-name">' + c.title + '</div><span class="level-badge ' + lvlClass + '">' + lvlLabel + '</span></div>' +
-                        '<div class="course-sub">' + c.description + '</div>' +
-                        '<div class="course-bottom">' +
-                            '<div class="course-stat">' + svg('book') + ' ' + c.lessons.length + ' уроков</div>' +
-                            '<div class="course-stat">' + svg('check') + ' ' + done + '/' + c.lessons.length + '</div>' +
-                        '</div>' +
-                        '<div class="course-progress"><div class="course-progress-fill" style="width:' + pct + '%;background:' + c.color + '"></div></div>' +
-                    '</div></div>';
-            }).join('');
+                const lvl = courseLevel[c.id] || 1;
+                return '<div class="course-card" onclick="openCourse(\'' + c.id + '\')">' +
+                    '<div class="course-accent" style="background:' + c.color + '"></div>' +
+                    '<div class="course-top"><div class="course-name">' + c.title + '</div><span class="lvl lvl-' + lvl + '">' + lvlNames[lvl] + '</span></div>' +
+                    '<div class="course-sub">' + c.description + '</div>' +
+                    '<div class="course-bottom">' +
+                        '<div class="course-stat">' + svg('book') + ' ' + c.lessons.length + ' уроков</div>' +
+                        '<div class="course-stat">' + svg('check') + ' ' + done + '/' + c.lessons.length + '</div>' +
+                    '</div>' +
+                    '<div class="course-progress"><div class="course-progress-fill" style="width:' + pct + '%;background:' + c.color + '"></div></div></div>';
+            }).join('') + '</div>';
+            document.getElementById('platform-content').innerHTML = html;
+            showPage('platform');
         }
 
         function openCourse(id) {
             currentCourse = allCourses.find(c => c.id === id);
             if (!currentCourse) return;
             document.getElementById('course-title').textContent = currentCourse.title;
+            document.getElementById('course-back-btn').onclick = function() { openPlatform(currentPlatform.id); };
             document.getElementById('lesson-list').innerHTML = currentCourse.lessons.map((l, i) => {
                 const done = progress.completedLessons && progress.completedLessons.includes(id + '-' + l.id);
-                return '<div class="lesson-item ' + (done?'completed':'') + '" onclick="openLesson(' + i + ')"><div class="lesson-num">' + (done ? svg('check') : (i+1)) + '</div><div class="lesson-body"><div class="lesson-name">' + l.title + '</div><div class="lesson-dur">' + svg('clock') + ' ' + l.duration + '</div></div><div class="lesson-check">' + (done ? svg('check') : '') + '</div></div>';
+                return '<div class="lesson-item ' + (done?'done':'') + '" onclick="openLesson(' + i + ')"><div class="lesson-num">' + (done ? svg('check') : (i+1)) + '</div><div class="lesson-body"><div class="lesson-name">' + l.title + '</div><div class="lesson-dur">' + svg('clock') + ' ' + l.duration + '</div></div></div>';
             }).join('');
             showPage('course');
         }
@@ -542,7 +520,7 @@
             if (btn.classList.contains('done')) return;
             try {
                 const r = await fetch('/api/progress', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:user.id,courseId:currentCourse.id,lessonId:currentLesson.id}) });
-                progress = await r.json(); updateStats(); renderCourses();
+                progress = await r.json(); updateStats(); renderHubs();
                 btn.querySelector('span').textContent = 'Пройдено'; btn.className = 'complete-btn done';
                 if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
             } catch(e) {}
@@ -553,14 +531,10 @@
             document.getElementById('lessons-done').textContent = completed;
             document.getElementById('xp-count').textContent = progress.xp || 0;
             document.getElementById('level-count').textContent = progress.level || 1;
-            document.getElementById('streak-count').textContent = (progress.streak || 0) + ' дней подряд';
             document.getElementById('p-streak').textContent = progress.streak || 0;
             document.getElementById('p-lessons').textContent = completed;
             document.getElementById('p-xp').textContent = progress.xp || 0;
-            if (completed > 0) {
-                document.getElementById('streak-bar').style.display = 'flex';
-                document.getElementById('stats-row').style.display = 'flex';
-            }
+            if (completed > 0) document.getElementById('stats-row').style.display = 'flex';
         }
 
         async function sendMsg() {
@@ -580,9 +554,7 @@
                 addChatMsg('Извини, произошла ошибка. Попробуй ещё раз.', 'ai');
             }
         }
-
         function sendQuick(q) { document.getElementById('chat-input').value = q; sendMsg(); }
-
         function addChatMsg(text, type, id) {
             const box = document.getElementById('chat-messages');
             const label = type === 'ai' ? '<span class="ai-label">' + svg('bot') + 'Наставник</span>' : '';
@@ -595,18 +567,15 @@
         }
 
         function openTool(name) { showPage(name); }
-
         function genIdeas(niche) {
             const ideas = ideasDB[niche] || [];
-            document.getElementById('ideas-output').innerHTML = '<div class="section-title" style="margin:16px 0 10px">' + niche.charAt(0).toUpperCase() + niche.slice(1) + '</div>' + ideas.map(i => '<div class="course-card" style="cursor:default;margin-bottom:8px"><div class="course-icon-wrap" style="background:rgba(201,168,76,0.1);">' + svg('lightbulb') + '</div><div class="course-body"><div class="course-name">' + i + '</div><div class="course-sub">Используй как тему для Reels, поста или видео</div></div></div>').join('');
+            document.getElementById('ideas-output').innerHTML = '<div style="font-size:14px;font-weight:700;margin:16px 0 10px">' + niche.charAt(0).toUpperCase() + niche.slice(1) + '</div>' + ideas.map(i => '<div class="course-card" style="cursor:default;margin-bottom:8px"><div class="course-top"><div class="course-name">' + svg('lightbulb') + ' ' + i + '</div></div><div class="course-sub">Используй как тему для Reels, поста или видео</div></div>').join('');
         }
-
         function renderTemplates() {
-            document.getElementById('templates-output').innerHTML = templates.map(t => '<div class="course-card" style="cursor:default;margin-bottom:8px" onclick="showAlert(\'' + t.desc.replace(/'/g,"\\'") + '\')"><div class="course-icon-wrap" style="background:rgba(201,168,76,0.1);">' + svg('file') + '</div><div class="course-body"><div class="course-top"><div class="course-name">' + t.title + '</div><span class="level-badge level-grow">' + t.tag + '</span></div><div class="course-sub">' + t.desc + '</div></div></div>').join('');
+            document.getElementById('templates-output').innerHTML = templates.map(t => '<div class="course-card" style="cursor:default;margin-bottom:8px" onclick="showAlert(\'' + t.desc.replace(/'/g,"\\'") + '\')"><div class="course-top"><div class="course-name">' + svg('file') + ' ' + t.title + '</div><span class="lvl lvl-2">' + t.tag + '</span></div><div class="course-sub">' + t.desc + '</div></div>').join('');
         }
-
         function renderChecklist() {
-            document.getElementById('checklist-output').innerHTML = '<div style="margin-bottom:12px;color:var(--text2);font-size:13px">Нажми на пункт, чтобы отметить</div>' + checklist.map((c, i) => '<div class="course-card" style="cursor:pointer;margin-bottom:8px" onclick="this.classList.toggle(\'checked\');this.querySelector(\'.lesson-num\').style.background=this.classList.contains(\'checked\')?\'var(--accent)\':\'var(--bg2)\';this.querySelector(\'.lesson-num\').style.color=this.classList.contains(\'checked\')?\'#000\':\'var(--text)\'"><div class="lesson-num" style="width:32px;height:32px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0">' + svg('check') + '</div><div class="course-body"><div class="course-name">' + (i+1) + '. ' + c.q + '</div></div></div>').join('');
+            document.getElementById('checklist-output').innerHTML = '<div style="margin-bottom:12px;color:var(--text2);font-size:13px">Нажми на пункт, чтобы отметить</div>' + checklist.map((c, i) => '<div class="course-card" style="cursor:pointer;margin-bottom:8px" onclick="this.querySelector(\'.lesson-num\').style.background=this.querySelector(\'.lesson-num\').style.background===\'var(--accent)\'?\'var(--bg2)\':\'var(--accent)\';this.querySelector(\'.lesson-num\').style.color=this.querySelector(\'.lesson-num\').style.color===\'#000\'?\'var(--text)\':\'#000\'"><div class="lesson-num" style="width:32px;height:32px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0">' + svg('check') + '</div><div class="lesson-body"><div class="lesson-name">' + (i+1) + '. ' + c.q + '</div></div></div>').join('');
         }
 
         function showPage(page) {
@@ -619,7 +588,6 @@
             if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
             window.scrollTo(0, 0);
         }
-
         function showAlert(text) { if (tg && tg.showAlert) tg.showAlert(text); else alert(text); }
     </script>
 </body>
