@@ -8,167 +8,294 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg: #0a0a0f; --bg2: #12121a; --bg3: #1a1a25; --bg4: #222230; --text: #fff; --text2: #8b8b9e; --accent: #c9a84c; --accent2: #d4b96a; --accent3: #a08630; --green: #10b981; --radius: 16px; }
+        :root { --bg: #0b0b10; --bg2: #111118; --bg3: #18181f; --bg4: #1f1f2a; --bg5: #262633; --text: #f0f0f5; --text2: #7a7a90; --text3: #55556a; --accent: #c9a84c; --accent2: #d4b96a; --accent3: #a08630; --green: #10b981; --red: #ef4444; --radius: 16px; --radius-sm: 12px; --radius-xs: 8px; }
         body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-        .app { max-width: 480px; margin: 0 auto; padding: 0 16px 100px; }
+        .app { max-width: 480px; margin: 0 auto; padding: 0 16px 110px; }
         .page { display: none; } .page.active { display: block; }
-        .header { padding: 24px 0 16px; text-align: center; }
-        .logo { font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #c9a84c, #d4b96a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { color: var(--text2); font-size: 13px; margin-top: 4px; }
-        .streak-banner { background: linear-gradient(135deg, #1e1c14, #2a2518); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(201,168,76,0.15); }
-        .streak-icon { width: 40px; height: 40px; color: var(--accent); } .streak-info h3 { font-size: 16px; font-weight: 700; } .streak-info p { font-size: 12px; color: var(--text2); }
-        .stats-bar { display: flex; gap: 10px; margin: 16px 0; }
-        .stat-card { flex: 1; background: var(--bg3); border-radius: 14px; padding: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.04); }
-        .stat-icon { width: 22px; height: 22px; margin: 0 auto 6px; color: var(--accent); } .stat-value { font-size: 22px; font-weight: 700; } .stat-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
-        .section-title { font-size: 16px; font-weight: 700; margin: 20px 0 12px; }
-        .platforms-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 4px 0 12px; -webkit-overflow-scrolling: touch; }
-        .platforms-scroll::-webkit-scrollbar { display: none; }
-        .platform-chip { flex-shrink: 0; padding: 10px 18px; border-radius: 24px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.06); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
-        .platform-chip:active { transform: scale(0.96); } .platform-chip.active { background: var(--accent); border-color: var(--accent); color: #000; }
-        .platform-chip svg { width: 16px; height: 16px; }
-        .courses-grid { display: flex; flex-direction: column; gap: 12px; }
-        .course-card { background: var(--bg3); border-radius: var(--radius); padding: 18px; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.04); position: relative; overflow: hidden; }
+
+        /* === HEADER === */
+        .header { padding: 20px 0 4px; }
+        .header-top { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        .logo-dot { color: var(--accent); }
+        .avatar-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--bg4); border: 2px solid var(--bg5); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .avatar-btn svg { width: 18px; height: 18px; color: var(--text2); }
+
+        /* === WELCOME === */
+        .welcome { padding: 24px 0 8px; }
+        .welcome h1 { font-size: 24px; font-weight: 800; line-height: 1.25; margin-bottom: 6px; }
+        .welcome h1 span { color: var(--accent); }
+        .welcome p { color: var(--text2); font-size: 14px; line-height: 1.5; }
+
+        /* === STATS ROW === */
+        .stats-row { display: flex; gap: 10px; margin: 20px 0; }
+        .stat-pill { flex: 1; background: var(--bg3); border-radius: var(--radius-sm); padding: 14px 12px; text-align: center; border: 1px solid rgba(255,255,255,0.03); }
+        .stat-pill-icon { width: 20px; height: 20px; margin: 0 auto 6px; color: var(--accent); opacity: 0.7; }
+        .stat-pill-val { font-size: 20px; font-weight: 700; }
+        .stat-pill-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+        /* === STREAK === */
+        .streak-bar { display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03)); border: 1px solid rgba(201,168,76,0.12); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px; }
+        .streak-fire { font-size: 24px; }
+        .streak-text { flex: 1; }
+        .streak-text strong { font-size: 14px; font-weight: 700; }
+        .streak-text p { font-size: 12px; color: var(--text2); margin-top: 1px; }
+
+        /* === SECTION === */
+        .section { margin-bottom: 24px; }
+        .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .section-title { font-size: 16px; font-weight: 700; }
+        .section-more { font-size: 12px; color: var(--accent); cursor: pointer; font-weight: 500; }
+
+        /* === RECOMMENDED === */
+        .reco-card { background: linear-gradient(135deg, #1a1810, #151510); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius); padding: 18px; margin-bottom: 20px; cursor: pointer; position: relative; overflow: hidden; }
+        .reco-card:active { transform: scale(0.98); }
+        .reco-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(201,168,76,0.15); color: var(--accent2); padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .reco-badge svg { width: 12px; height: 12px; }
+        .reco-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+        .reco-desc { font-size: 13px; color: var(--text2); line-height: 1.4; margin-bottom: 14px; }
+        .reco-meta { display: flex; align-items: center; gap: 14px; }
+        .reco-meta-item { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
+        .reco-meta-item svg { width: 12px; height: 12px; }
+        .reco-glow { position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 70%); border-radius: 50%; }
+
+        /* === LEVEL BADGES === */
+        .level-badge { display: inline-flex; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .level-start { background: rgba(16,185,129,0.12); color: #34d399; }
+        .level-grow { background: rgba(201,168,76,0.12); color: var(--accent2); }
+        .level-master { background: rgba(139,92,246,0.12); color: #a78bfa; }
+
+        /* === COURSE CARDS === */
+        .courses-list { display: flex; flex-direction: column; gap: 10px; }
+        .course-card { background: var(--bg3); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; display: flex; gap: 14px; align-items: flex-start; }
         .course-card:active { transform: scale(0.98); background: var(--bg4); }
-        .course-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .course-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .course-icon svg { width: 22px; height: 22px; }
-        .course-info { flex: 1; } .course-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; } .course-desc { font-size: 12px; color: var(--text2); }
-        .course-meta { display: flex; gap: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.04); }
-        .course-meta-item { font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 5px; }
-        .course-meta-item svg { width: 12px; height: 12px; opacity: 0.6; }
-        .progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 12px; overflow: hidden; }
-        .progress-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+        .course-card-accent { position: absolute; top: 0; left: 0; width: 3px; height: 100%; border-radius: 3px 0 0 3px; }
+        .course-icon-wrap { width: 46px; height: 46px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .course-icon-wrap svg { width: 22px; height: 22px; }
+        .course-body { flex: 1; min-width: 0; }
+        .course-top { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+        .course-name { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .course-sub { font-size: 12px; color: var(--text2); margin-bottom: 10px; line-height: 1.3; }
+        .course-bottom { display: flex; align-items: center; gap: 12px; }
+        .course-stat { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
+        .course-stat svg { width: 12px; height: 12px; opacity: 0.5; }
+        .course-progress { width: 100%; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+        .course-progress-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+
+        /* === PLATFORM FILTER === */
+        .platforms-row { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 8px; -webkit-overflow-scrolling: touch; }
+        .platforms-row::-webkit-scrollbar { display: none; }
+        .plat-chip { flex-shrink: 0; padding: 8px 16px; border-radius: 20px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.04); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 6px; color: var(--text2); }
+        .plat-chip:active { transform: scale(0.96); }
+        .plat-chip.active { background: var(--accent); border-color: var(--accent); color: #000; }
+        .plat-chip svg { width: 14px; height: 14px; }
+
+        /* === TOOLS GRID === */
+        .tools-list { display: flex; flex-direction: column; gap: 10px; }
+        .tool-row { display: flex; gap: 10px; }
+        .tool-card { flex: 1; background: var(--bg3); border-radius: var(--radius); padding: 18px 14px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); text-align: center; }
+        .tool-card:active { transform: scale(0.97); background: var(--bg4); }
+        .tool-icon { width: 42px; height: 42px; border-radius: 14px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
+        .tool-icon svg { width: 22px; height: 22px; }
+        .tool-name { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+        .tool-sub { font-size: 11px; color: var(--text2); line-height: 1.3; }
+
+        /* === TIP === */
+        .tip-card { background: var(--bg3); border-radius: var(--radius); padding: 16px 18px; border-left: 3px solid var(--accent); }
+        .tip-label { display: inline-block; background: rgba(201,168,76,0.12); color: var(--accent2); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
+        .tip-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .tip-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+        /* === LESSON === */
         .lesson-list { display: flex; flex-direction: column; gap: 8px; }
-        .lesson-item { background: var(--bg3); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.04); }
-        .lesson-item:active { transform: scale(0.98); } .lesson-item.completed { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.08); }
-        .lesson-number { width: 30px; height: 30px; border-radius: 8px; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
-        .lesson-item.completed .lesson-number { background: var(--accent); color: #000; }
-        .lesson-content { flex: 1; } .lesson-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; } .lesson-duration { font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 4px; }
-        .lesson-duration svg { width: 12px; height: 12px; opacity: 0.6; }
-        .lesson-check { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); }
-        .lesson-item.completed .lesson-check { background: var(--accent); border-color: var(--accent); display: flex; align-items: center; justify-content: center; }
-        .lesson-item.completed .lesson-check svg { width: 10px; height: 10px; color: #000; }
-        .modal-header { padding: 16px 0; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); position: sticky; top: 0; background: var(--bg); z-index: 10; }
-        .back-btn { width: 34px; height: 34px; border-radius: 10px; background: var(--bg3); border: none; color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .back-btn svg { width: 18px; height: 18px; }
-        .modal-title { font-size: 17px; font-weight: 700; flex: 1; }
-        .lesson-detail { background: var(--bg3); border-radius: var(--radius); padding: 20px; margin: 16px 0; }
-        .lesson-detail-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-        .lesson-detail-meta { color: var(--text2); font-size: 12px; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
-        .lesson-detail-meta svg { width: 14px; height: 14px; }
-        .lesson-detail-content { color: var(--text2); font-size: 14px; line-height: 1.7; }
-        .lesson-detail-content p { margin-bottom: 12px; }
-        .complete-btn { width: 100%; padding: 14px; border-radius: var(--radius); background: linear-gradient(135deg, #c9a84c, #a08630); border: none; color: #000; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .complete-btn:active { transform: scale(0.98); } .complete-btn.done { background: var(--bg3); color: var(--accent); border: 1px solid rgba(201,168,76,0.3); }
+        .lesson-item { background: var(--bg3); border-radius: var(--radius-sm); padding: 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.15s; border: 1px solid rgba(255,255,255,0.03); }
+        .lesson-item:active { transform: scale(0.98); }
+        .lesson-item.completed { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.05); }
+        .lesson-num { width: 32px; height: 32px; border-radius: var(--radius-xs); background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+        .lesson-item.completed .lesson-num { background: var(--accent); color: #000; }
+        .lesson-body { flex: 1; }
+        .lesson-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+        .lesson-dur { font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 4px; }
+        .lesson-dur svg { width: 12px; height: 12px; opacity: 0.5; }
+        .lesson-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
+        .lesson-item.completed .lesson-check { background: var(--accent); border-color: var(--accent); }
+        .lesson-item.completed .lesson-check svg { width: 11px; height: 11px; color: #000; }
+
+        /* === DETAIL === */
+        .detail-card { background: var(--bg3); border-radius: var(--radius); padding: 22px; margin: 16px 0; }
+        .detail-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+        .detail-meta { color: var(--text2); font-size: 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+        .detail-meta svg { width: 14px; height: 14px; }
+        .detail-text { color: var(--text2); font-size: 14px; line-height: 1.75; }
+        .detail-text p { margin-bottom: 14px; }
+        .complete-btn { width: 100%; padding: 15px; border-radius: var(--radius-sm); background: linear-gradient(135deg, #c9a84c, #a08630); border: none; color: #000; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .complete-btn:active { transform: scale(0.98); }
+        .complete-btn.done { background: var(--bg3); color: var(--accent); border: 1px solid rgba(201,168,76,0.25); }
         .complete-btn svg { width: 18px; height: 18px; }
-        .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .tool-card { background: var(--bg3); border-radius: 14px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.04); }
-        .tool-card:active { transform: scale(0.96); }
-        .tool-card svg { width: 28px; height: 28px; color: var(--accent); margin-bottom: 8px; } .tool-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; } .tool-desc { font-size: 11px; color: var(--text2); }
-        .tip-card { background: var(--bg3); border-radius: var(--radius); padding: 18px; margin-bottom: 12px; border-left: 3px solid var(--accent); }
-        .tip-badge { display: inline-block; background: rgba(201,168,76,0.15); color: var(--accent2); padding: 3px 10px; border-radius: 8px; font-size: 10px; font-weight: 600; margin-bottom: 10px; }
-        .tip-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; } .tip-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
-        .chat-container { display: flex; flex-direction: column; height: calc(100vh - 140px); }
-        .chat-messages { flex: 1; overflow-y: auto; padding: 16px 0; display: flex; flex-direction: column; gap: 12px; }
+
+        /* === HEADER NAV === */
+        .pg-header { padding: 16px 0; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); position: sticky; top: 0; background: var(--bg); z-index: 10; }
+        .back-btn { width: 36px; height: 36px; border-radius: var(--radius-xs); background: var(--bg3); border: none; color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .back-btn svg { width: 18px; height: 18px; }
+        .pg-title { font-size: 17px; font-weight: 700; flex: 1; }
+
+        /* === CHAT === */
+        .chat-wrap { display: flex; flex-direction: column; height: calc(100vh - 130px); }
+        .chat-msgs { flex: 1; overflow-y: auto; padding: 16px 0; display: flex; flex-direction: column; gap: 12px; }
         .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.5; }
         .chat-msg.user { background: var(--accent); color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
-        .chat-msg.ai { background: var(--bg3); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(255,255,255,0.06); }
-        .chat-msg.ai .ai-label { font-size: 10px; color: var(--accent2); font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-        .chat-msg.ai .ai-label svg { width: 14px; height: 14px; }
-        .chat-input-wrap { padding: 12px 0; display: flex; gap: 8px; }
-        .chat-input { flex: 1; background: var(--bg3); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; padding: 12px 16px; color: var(--text); font-size: 14px; font-family: inherit; outline: none; resize: none; }
-        .chat-input::placeholder { color: var(--text2); }
+        .chat-msg.ai { background: var(--bg3); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(255,255,255,0.04); }
+        .chat-msg .ai-label { font-size: 10px; color: var(--accent2); font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+        .chat-msg .ai-label svg { width: 14px; height: 14px; }
+        .quick-questions { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+        .quick-q { padding: 8px 14px; border-radius: 20px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.05); color: var(--text2); font-size: 12px; cursor: pointer; transition: all 0.15s; }
+        .quick-q:active { background: var(--accent); color: #000; }
+        .chat-input-row { padding: 10px 0; display: flex; gap: 8px; }
+        .chat-input { flex: 1; background: var(--bg3); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 12px 16px; color: var(--text); font-size: 14px; font-family: inherit; outline: none; }
+        .chat-input::placeholder { color: var(--text3); }
         .chat-send { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); border: none; color: #000; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .chat-send svg { width: 20px; height: 20px; }
-        .chat-send:active { transform: scale(0.95); }
-        .quick-questions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-        .quick-q { padding: 8px 14px; border-radius: 20px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.06); color: var(--text2); font-size: 12px; cursor: pointer; transition: all 0.2s; }
-        .quick-q:active { background: var(--accent); color: #000; }
-        .tool-page-content { padding: 16px 0; }
-        .template-card { background: var(--bg3); border-radius: 12px; padding: 16px; margin-bottom: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.04); }
-        .template-card:active { background: var(--bg4); }
-        .template-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-        .template-title svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
-        .template-desc { font-size: 12px; color: var(--text2); }
-        .template-tag { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600; margin-top: 8px; }
-        .premium-card { background: linear-gradient(135deg, #1a1810, #1e1c14); border-radius: var(--radius); padding: 22px; margin: 16px 0; border: 1px solid rgba(201,168,76,0.2); }
-        .premium-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #c9a84c, #a08630); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
-        .premium-badge svg { width: 12px; height: 12px; }
-        .premium-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-        .premium-desc { font-size: 12px; color: var(--text2); margin-bottom: 14px; line-height: 1.5; }
-        .premium-price { font-size: 26px; font-weight: 800; margin-bottom: 14px; color: var(--accent); }
-        .premium-price span { font-size: 13px; font-weight: 400; color: var(--text2); }
-        .premium-btn { width: 100%; padding: 13px; border-radius: 12px; background: linear-gradient(135deg, #c9a84c, #a08630); border: none; color: #000; font-size: 14px; font-weight: 700; cursor: pointer; }
-        .profile-header { text-align: center; padding: 24px 0; }
-        .avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #a08630); margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; }
-        .avatar svg { width: 32px; height: 32px; color: #000; }
-        .profile-name { font-size: 18px; font-weight: 700; } .profile-id { font-size: 12px; color: var(--text2); }
+
+        /* === PROFILE === */
+        .profile-top { text-align: center; padding: 24px 0 20px; }
+        .avatar-lg { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent3)); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; }
+        .avatar-lg svg { width: 32px; height: 32px; color: #000; }
+        .profile-name { font-size: 18px; font-weight: 700; }
+        .profile-id { font-size: 12px; color: var(--text3); margin-top: 2px; }
         .settings-list { display: flex; flex-direction: column; gap: 8px; }
-        .settings-item { background: var(--bg3); border-radius: 12px; padding: 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+        .settings-item { background: var(--bg3); border-radius: var(--radius-sm); padding: 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
         .settings-left { display: flex; align-items: center; gap: 12px; }
-        .settings-icon { width: 34px; height: 34px; border-radius: 10px; background: var(--bg2); display: flex; align-items: center; justify-content: center; }
+        .settings-icon { width: 34px; height: 34px; border-radius: var(--radius-xs); background: var(--bg2); display: flex; align-items: center; justify-content: center; }
         .settings-icon svg { width: 16px; height: 16px; color: var(--accent); }
-        .settings-text { font-size: 13px; font-weight: 500; } .settings-arrow { color: var(--text2); font-size: 14px; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg2); border-top: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: center; padding: 10px 16px; padding-bottom: max(10px, env(safe-area-inset-bottom)); z-index: 50; }
-        .nav-items { display: flex; gap: 4px; background: var(--bg3); border-radius: 18px; padding: 5px; }
-        .nav-item { padding: 8px 12px; border-radius: 12px; border: none; background: transparent; color: var(--text2); font-size: 10px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 4px; }
-        .nav-item.active { background: var(--accent); color: #000; }
-        .nav-item svg { width: 14px; height: 14px; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { animation: fadeIn 0.3s ease forwards; }
+        .settings-label { font-size: 13px; font-weight: 500; }
+        .settings-arrow { color: var(--text3); font-size: 14px; }
+
+        /* === BOTTOM NAV === */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(17,17,24,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: center; padding: 8px 16px; padding-bottom: max(8px, env(safe-area-inset-bottom)); z-index: 50; }
+        .nav-items { display: flex; gap: 2px; background: var(--bg3); border-radius: 16px; padding: 4px; }
+        .nav-btn { padding: 8px 14px; border-radius: 12px; border: none; background: transparent; color: var(--text3); font-size: 10px; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; align-items: center; gap: 3px; letter-spacing: 0.2px; }
+        .nav-btn.active { background: var(--accent); color: #000; }
+        .nav-btn svg { width: 16px; height: 16px; }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .anim { animation: fadeIn 0.3s ease forwards; }
         .loading-dots::after { content: ''; animation: dots 1.5s infinite; }
         @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60%, 100% { content: '...'; } }
+
+        /* === EMPTY STATE === */
+        .empty-hint { text-align: center; padding: 20px; color: var(--text3); font-size: 13px; }
     </style>
 </head>
 <body>
     <div class="app">
+        <!-- ===== HOME ===== -->
         <div id="home-page" class="page active">
-            <div class="header animate-in">
-                <div class="logo">Content Factory</div>
-                <div class="subtitle">Из новичка — в звезду соцсетей</div>
+            <div class="header anim">
+                <div class="header-top">
+                    <div class="logo">Content<span class="logo-dot">.</span></div>
+                    <div class="avatar-btn" onclick="showPage('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                </div>
             </div>
-            <div class="streak-banner animate-in">
-                <svg class="streak-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c0 4-4 6-4 10a4 4 0 1 0 8 0c0-4-4-6-4-10z"/></svg>
-                <div class="streak-info"><h3 id="streak-count">0 дней подряд</h3><p>Учись каждый день!</p></div>
+
+            <div class="welcome anim">
+                <h1 id="welcome-text">Научим делать <span>контент</span>, который зарабатывает</h1>
+                <p id="welcome-sub">12 курсов, AI-наставник и готовые инструменты — всё бесплатно</p>
             </div>
-            <div class="stats-bar animate-in">
-                <div class="stat-card"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><div class="stat-value" id="lessons-done">0</div><div class="stat-label">Уроков</div></div>
-                <div class="stat-card"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><div class="stat-value" id="xp-count">0</div><div class="stat-label">XP</div></div>
-                <div class="stat-card"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg><div class="stat-value" id="level-count">1</div><div class="stat-label">Уровень</div></div>
+
+            <div class="streak-bar anim" id="streak-bar" style="display:none">
+                <div class="streak-fire">🔥</div>
+                <div class="streak-text"><strong id="streak-count">0 дней подряд</strong><p>Продолжай учиться!</p></div>
             </div>
-            <div class="section-title">Платформы</div>
-            <div class="platforms-scroll" id="platforms-scroll"></div>
-            <div class="section-title">Курсы</div>
-            <div class="courses-grid" id="courses-grid"></div>
-            <div class="section-title">Инструменты</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showPage('mentor')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V22l4-3h3a8 8 0 0 0 0-16z"/><circle cx="8" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="10" r="1" fill="currentColor"/><circle cx="16" cy="10" r="1" fill="currentColor"/></svg><div class="tool-name">AI-Наставник</div><div class="tool-desc">Задай вопрос</div></div>
-                <div class="tool-card" onclick="openTool('ideas')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg><div class="tool-name">Генератор идей</div><div class="tool-desc">Темы для контента</div></div>
-                <div class="tool-card" onclick="openTool('templates')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><div class="tool-name">Шаблоны</div><div class="tool-desc">Готовые тексты</div></div>
-                <div class="tool-card" onclick="openTool('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><div class="tool-name">Чеклисты</div><div class="tool-desc">Проверь пост</div></div>
+
+            <div class="stats-row anim" id="stats-row" style="display:none">
+                <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><div class="stat-pill-val" id="lessons-done">0</div><div class="stat-pill-label">уроков</div></div>
+                <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><div class="stat-pill-val" id="xp-count">0</div><div class="stat-pill-label">XP</div></div>
+                <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg><div class="stat-pill-val" id="level-count">1</div><div class="stat-pill-label">уровень</div></div>
             </div>
-            <div class="section-title">Совет дня</div>
-            <div class="tip-card"><div class="tip-badge">Совет</div><div class="tip-title" id="tip-title"></div><div class="tip-text" id="tip-text"></div></div>
+
+            <div class="section anim" id="reco-section">
+                <div class="section-head"><div class="section-title">Начни с этого</div></div>
+                <div class="reco-card" onclick="openCourse('ig-reels')">
+                    <div class="reco-glow"></div>
+                    <div class="reco-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Рекомендуем</div>
+                    <div class="reco-title">Reels для Instagram</div>
+                    <div class="reco-desc">Самый быстрый способ набрать подписчиков. Научись делать вирусные видео с нуля.</div>
+                    <div class="reco-meta">
+                        <div class="reco-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~50 мин</div>
+                        <div class="reco-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>10 уроков</div>
+                        <span class="level-badge level-start">Старт</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section anim">
+                <div class="section-head"><div class="section-title">Курсы</div><div class="section-more" onclick="filterPlatform('all')">Все</div></div>
+                <div class="platforms-row" id="platforms-scroll"></div>
+                <div class="courses-list" id="courses-grid"></div>
+            </div>
+
+            <div class="section anim">
+                <div class="section-head"><div class="section-title">Инструменты</div></div>
+                <div class="tools-list">
+                    <div class="tool-row">
+                        <div class="tool-card" onclick="showPage('mentor')">
+                            <div class="tool-icon" style="background:rgba(201,168,76,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                            <div class="tool-name">Задать вопрос</div>
+                            <div class="tool-sub">AI-наставник ответит</div>
+                        </div>
+                        <div class="tool-card" onclick="openTool('ideas')">
+                            <div class="tool-icon" style="background:rgba(16,185,129,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></div>
+                            <div class="tool-name">Генератор идей</div>
+                            <div class="tool-sub">8 ниш, 64 темы</div>
+                        </div>
+                    </div>
+                    <div class="tool-row">
+                        <div class="tool-card" onclick="openTool('templates')">
+                            <div class="tool-icon" style="background:rgba(139,92,246,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                            <div class="tool-name">Шаблоны</div>
+                            <div class="tool-sub">Готовые тексты и формулы</div>
+                        </div>
+                        <div class="tool-card" onclick="openTool('checklist')">
+                            <div class="tool-icon" style="background:rgba(239,68,68,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                            <div class="tool-name">Чеклист</div>
+                            <div class="tool-sub">Проверь пост перед публикацией</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section anim">
+                <div class="section-head"><div class="section-title">Совет дня</div></div>
+                <div class="tip-card">
+                    <div class="tip-label">Совет</div>
+                    <div class="tip-title" id="tip-title"></div>
+                    <div class="tip-text" id="tip-text"></div>
+                </div>
+            </div>
         </div>
 
+        <!-- ===== COURSE ===== -->
         <div id="course-page" class="page">
-            <div class="modal-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="modal-title" id="course-title"></div></div>
+            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title" id="course-title"></div></div>
             <div style="padding:16px 0"><div class="lesson-list" id="lesson-list"></div></div>
         </div>
 
+        <!-- ===== LESSON ===== -->
         <div id="lesson-page" class="page">
-            <div class="modal-header"><button class="back-btn" onclick="showPage('course')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="modal-title" id="lesson-title"></div></div>
+            <div class="pg-header"><button class="back-btn" onclick="showPage('course')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title" id="lesson-title"></div></div>
             <div style="padding:16px 0">
-                <div class="lesson-detail"><div class="lesson-detail-title" id="detail-title"></div><div class="lesson-detail-meta" id="detail-meta"></div><div class="lesson-detail-content" id="detail-content"></div></div>
+                <div class="detail-card"><div class="detail-title" id="detail-title"></div><div class="detail-meta" id="detail-meta"></div><div class="detail-text" id="detail-content"></div></div>
                 <button class="complete-btn" id="complete-btn" onclick="completeLesson()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Завершить урок</span></button>
             </div>
         </div>
 
+        <!-- ===== MENTOR ===== -->
         <div id="mentor-page" class="page">
-            <div class="modal-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="modal-title">AI-Наставник</div></div>
-            <div class="chat-container">
-                <div class="chat-messages" id="chat-messages">
-                    <div class="chat-msg ai"><span class="ai-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V22l4-3h3a8 8 0 0 0 0-16z"/></svg>Наставник</span>Привет! Я твой AI-наставник по контенту. Спроси как сделать Reels, начать YouTube, заработать на блоге или расти в TikTok!</div>
+            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Наставник</div></div>
+            <div class="chat-wrap">
+                <div class="chat-msgs" id="chat-messages">
+                    <div class="chat-msg ai"><span class="ai-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V22l4-3h3a8 8 0 0 0 0-16z"/></svg>Наставник</span>Привет! Я помогу разобраться в контенте. Спроси про Reels, YouTube, TikTok, заработок или что угодно!</div>
                     <div class="quick-questions">
                         <div class="quick-q" onclick="sendQuick('Как сделать вирусный Reels?')">Reels</div>
                         <div class="quick-q" onclick="sendQuick('Как начать YouTube?')">YouTube</div>
@@ -177,17 +304,18 @@
                         <div class="quick-q" onclick="sendQuick('Какие инструменты бесплатные?')">Инструменты</div>
                     </div>
                 </div>
-                <div class="chat-input-wrap">
-                    <input class="chat-input" id="chat-input" placeholder="Задай вопрос..." onkeydown="if(event.key==='Enter')sendMsg()">
+                <div class="chat-input-row">
+                    <input class="chat-input" id="chat-input" placeholder="Спроси что-нибудь..." onkeydown="if(event.key==='Enter')sendMsg()">
                     <button class="chat-send" onclick="sendMsg()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
                 </div>
             </div>
         </div>
 
+        <!-- ===== TOOLS ===== -->
         <div id="ideas-page" class="page">
-            <div class="modal-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="modal-title">Генератор идей</div></div>
-            <div class="tool-page-content">
-                <div class="section-title">Выбери нишу</div>
+            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Генератор идей</div></div>
+            <div style="padding:16px 0">
+                <div class="section-title" style="margin-bottom:12px">Выбери нишу</div>
                 <div class="quick-questions" id="niche-btns">
                     <div class="quick-q" onclick="genIdeas('кулинария')">Кулинария</div>
                     <div class="quick-q" onclick="genIdeas('путешествия')">Путешествия</div>
@@ -203,57 +331,43 @@
         </div>
 
         <div id="templates-page" class="page">
-            <div class="modal-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="modal-title">Шаблоны</div></div>
-            <div class="tool-page-content" id="templates-output"></div>
+            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Шаблоны</div></div>
+            <div style="padding:16px 0" id="templates-output"></div>
         </div>
 
         <div id="checklist-page" class="page">
-            <div class="modal-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="modal-title">Чеклист поста</div></div>
-            <div class="tool-page-content" id="checklist-output"></div>
+            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Чеклист</div></div>
+            <div style="padding:16px 0" id="checklist-output"></div>
         </div>
 
-        <div id="premium-page" class="page">
-            <div class="modal-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="modal-title">Premium</div></div>
-            <div style="padding:16px 0">
-                <div class="premium-card">
-                    <div class="premium-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Premium</div>
-                    <div class="premium-title">Content Factory Pro</div>
-                    <div class="premium-desc">Полный доступ, AI-наставник без ограничений, индивидуальные разборы</div>
-                    <div class="premium-price">299₽ <span>/ месяц</span></div>
-                    <button class="premium-btn" onclick="showAlert('Скоро будет доступно!')">Получить Premium</button>
-                </div>
-            </div>
-        </div>
-
+        <!-- ===== PROFILE ===== -->
         <div id="profile-page" class="page">
-            <div class="modal-header"><div class="modal-title">Профиль</div></div>
+            <div class="pg-header"><button class="back-btn" onclick="showPage('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="pg-title">Профиль</div></div>
             <div style="padding:16px 0">
-                <div class="profile-header">
-                    <div class="avatar" id="user-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <div class="profile-top">
+                    <div class="avatar-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
                     <div class="profile-name" id="user-name">Пользователь</div>
                     <div class="profile-id" id="user-id">ID: ---</div>
                 </div>
-                <div class="section-title">Статистика</div>
-                <div class="stats-bar">
-                    <div class="stat-card"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c0 4-4 6-4 10a4 4 0 1 0 8 0c0-4-4-6-4-10z"/></svg><div class="stat-value" id="p-streak">0</div><div class="stat-label">Серия</div></div>
-                    <div class="stat-card"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><div class="stat-value" id="p-lessons">0</div><div class="stat-label">Уроков</div></div>
-                    <div class="stat-card"><svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><div class="stat-value" id="p-xp">0</div><div class="stat-label">XP</div></div>
+                <div class="stats-row">
+                    <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c0 4-4 6-4 10a4 4 0 1 0 8 0c0-4-4-6-4-10z"/></svg><div class="stat-pill-val" id="p-streak">0</div><div class="stat-pill-label">серия</div></div>
+                    <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><div class="stat-pill-val" id="p-lessons">0</div><div class="stat-pill-label">уроков</div></div>
+                    <div class="stat-pill"><svg class="stat-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><div class="stat-pill-val" id="p-xp">0</div><div class="stat-pill-label">XP</div></div>
                 </div>
-                <div class="section-title">Настройки</div>
+                <div class="section-title" style="margin:20px 0 12px">Настройки</div>
                 <div class="settings-list">
-                    <div class="settings-item" onclick="showPage('premium')"><div class="settings-left"><div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="settings-text">Premium</div></div><div class="settings-arrow">→</div></div>
-                    <div class="settings-item" onclick="showAlert('Спасибо за использование Content Factory!')"><div class="settings-left"><div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="settings-text">Помощь</div></div><div class="settings-arrow">→</div></div>
+                    <div class="settings-item" onclick="showAlert('Content Factory — бесплатная платформа для создания контента')"><div class="settings-left"><div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="settings-label">О приложении</div></div><div class="settings-arrow">→</div></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- ===== BOTTOM NAV ===== -->
     <div class="bottom-nav">
         <div class="nav-items">
-            <button class="nav-item active" onclick="showPage('home')" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Главная</button>
-            <button class="nav-item" onclick="showPage('mentor')" data-page="mentor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Наставник</button>
-            <button class="nav-item" onclick="showPage('premium')" data-page="premium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Premium</button>
-            <button class="nav-item" onclick="showPage('profile')" data-page="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Профиль</button>
+            <button class="nav-btn active" onclick="showPage('home')" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Главная</button>
+            <button class="nav-btn" onclick="showPage('mentor')" data-page="mentor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Вопрос</button>
+            <button class="nav-btn" onclick="showPage('profile')" data-page="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Профиль</button>
         </div>
     </div>
 
@@ -275,26 +389,34 @@
             bot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V22l4-3h3a8 8 0 0 0 0-16z"/><circle cx="8" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="10" r="1" fill="currentColor"/><circle cx="16" cy="10" r="1" fill="currentColor"/></svg>',
             chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
             play: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
-            mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>',
             briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
             target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
             gift: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
             star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
-            all: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
-            sparkle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>'
+            sparkle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>',
+            zap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+            users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+            funnel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>',
+            send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+            all: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>'
         };
 
-        const platformIcons = { all: 'all', instagram: 'instagram', youtube: 'youtube', tiktok: 'tiktok', ai: 'sparkle', general: 'chart' };
-        const courseIcons = { 'ig-reels': 'play', 'ig-carousels': 'gift', 'ig-stories': 'instagram', 'ig-growth': 'chart', 'yt-basics': 'youtube', 'yt-shorts': 'play', 'tiktok-viral': 'tiktok', 'tiktok-business': 'briefcase', 'ai-content': 'bot', 'monetization': 'gift', 'content-strategy': 'target', 'design-basics': 'sparkle' };
+        const platformIcons = { all: 'all', instagram: 'instagram', youtube: 'youtube', tiktok: 'tiktok', telegram: 'send', ai: 'sparkle', general: 'chart' };
+        const courseIcons = { 'ig-reels': 'play', 'ig-carousels': 'gift', 'ig-stories': 'instagram', 'ig-growth': 'chart', 'yt-basics': 'youtube', 'yt-shorts': 'play', 'tiktok-viral': 'tiktok', 'tiktok-business': 'briefcase', 'tg-channel': 'send', 'sales-funnels': 'funnel', 'ai-content': 'bot', 'ai-prompts': 'sparkle', 'monetization': 'gift', 'content-strategy': 'target', 'design-basics': 'star' };
+        const courseLevel = { 'ig-reels': 'start', 'ig-carousels': 'start', 'ig-stories': 'start', 'ig-growth': 'grow', 'yt-basics': 'start', 'yt-shorts': 'start', 'tiktok-viral': 'start', 'tiktok-business': 'grow', 'tg-channel': 'start', 'sales-funnels': 'master', 'ai-content': 'grow', 'ai-prompts': 'grow', 'monetization': 'master', 'content-strategy': 'grow', 'design-basics': 'start' };
+        const levelLabels = { start: 'Старт', grow: 'Рост', master: 'Мастер' };
 
         const tips = [
-            {t:'Публикуй в прайм-тайм', x:'12:00-14:00 и 18:00-21:00 — пик активности аудитории.'},
-            {t:'Hook в первые 2 секунды', x:'Начинай с вопроса, шокирующего факта или необычного кадра.'},
-            {t:'3-5 хештегов — оптимум', x:'Смешивай крупные (>500к) и нишевые (<50к).'},
-            {t:'Отвечай на комментарии', x:'В первые 30 минут после публикации — это увеличивает охват.'},
-            {t:'Ресайкл контента', x:'Одно видео → Reels + TikTok + Shorts + пост + Stories.'},
-            {t:'Сохрани = ценность', x:'Instagram любит сохранения. Давай полезный контент.'},
-            {t:'Коллаборации = рост', x:'Совместные видео с блогерами твоего уровня.'}
+            {t:'Хук в первые 2 секунды', x:'Начинай с вопроса, шокирующего факта или необычного кадра — иначе листнут.'},
+            {t:'Сохранения > Лайков', x:'В 2026 году Instagram продвигает контент, который сохраняют и пересылают. Давай пользу.'},
+            {t:'Сценарий важнее камеры', x:'Говори не про себя, а про боли аудитории. Лучший контент = адаптация того, что уже зашло.'},
+            {t:'Правило 70/30', x:'70% полезного контента, 30% личного/продаваемого. Иначе аудитория уйдёт.'},
+            {t:'Ресайкл = экономия', x:'Одно видео → Reels + TikTok + Shorts + пост + Stories. 70% экономии времени.'},
+            {t:'Воронка > Охваты', x:'Без связки "контент → воронка → оффер → продажа" охваты = ноль денег.'},
+            {t:'Комментируй в своей нише', x:'20-30 комментариев в день под чужими постами = трафик к тебе в профиль.'},
+            {t:'Серийный контент', x:'Делай мини-сериалы: часть 1, часть 2... Люди подписываются, чтобы не пропустить.'},
+            {t:'AI экономит 3 часа', x:'ChatGPT для идей и текстов, Midjourney для картинок. Используй — это бесплатно.'},
+            {t:'Прайм-тайм', x:'Публикуй за 30 мин до пика: 12:00-14:00 и 18:00-21:00.'}
         ];
 
         const ideasDB = {
@@ -309,27 +431,33 @@
         };
 
         const templates = [
-            {title:'Заголовок для Reels', desc:'"Я потратил X часов на... чтобы выяснилось что..."', tag:'Reels'},
-            {title:'Подпись для поста', desc:'"Сохрани, чтобы не потерять + 3-5 хештегов"', tag:'Пост'},
-            {title:'Превью для YouTube', desc:'Лицо с эмоцией + 4-5 слов крупным текстом', tag:'YouTube'},
+            {title:'Хук для Reels', desc:'"Я потратил X часов на... чтобы выяснить что..."', tag:'Reels'},
+            {title:'Подпись для поста', desc:'"Сохрани, чтобы не потерять..." + 3-5 хештегов', tag:'Пост'},
+            {title:'Превью YouTube', desc:'Лицо с эмоцией + 4-5 слов крупным текстом', tag:'YouTube'},
             {title:'Хук для TikTok', desc:'"Никто не расскажет ЭТО..." + трендовый звук', tag:'TikTok'},
-            {title:'CTA (призыв)', desc:'"Подпишись ещё / Сохрани / Напиши в комментах"', tag:'Все'},
-            {title:'Продающий пост', desc:'"Проблема → Решение → Как получить → Ссылка"', tag:'Продажи'},
-            {title:'Сторителлинг', desc:'"Герой → Проблема → Путь → Результат → Мораль"', tag:'История'},
-            {title:'Обзор/Отзыв', desc:'"Что это + Мои впечатления + Плюсы/Минусы + Вердикт"', tag:'Обзор'}
+            {title:'CTA (призыв)', desc:'"Подпишись / Сохрани / Напиши в комментах"', tag:'Все'},
+            {title:'Продающий пост', desc:'Проблема → Решение → Как получить → Ссылка', tag:'Продажи'},
+            {title:'Сторителлинг', desc:'Герой → Проблема → Путь → Результат → Мораль', tag:'История'},
+            {title:'Обзор/Отзыв', desc:'Что это → Впечатления → Плюсы/Минусы → Вердикт', tag:'Обзор'},
+            {title:'Автоворонка (Телеграм)', desc:'Лид-магнит → Бот → Прогрев → Продажа', tag:'Telegram'},
+            {title:'Карусель-лекция', desc:'Слайд 1: Хук → Слайды 2-8: Советы → Слайд 9: CTA', tag:'Instagram'},
+            {title:'AI-промпт для контента', desc:'"Напиши пост для [ниши] на тему [тема] в стиле [тон]"', tag:'AI'},
+            {title:'Системный запуск', desc:'Тизер → Анонс → Открытие → Напоминание → Старт', tag:'Запуск'}
         ];
 
         const checklist = [
-            {q:'Есть ли хук в первые 1-2 секунды?'},
+            {q:'Хук в первые 1-2 секунды?'},
             {q:'Видео короткое (7-30 сек для Reels)?'},
-            {q:'Есть текст на экране?'},
-            {q:'Хорошее освещение?'},
+            {q:'Текст на экране крупный и читаемый?'},
+            {q:'Освещение нормальное?'},
             {q:'Звук чёткий, без шума?'},
-            {q:'Есть CTA (подписка/комментарий)?'},
-            {q:'Добавлены 3-5 хештегов?'},
-            {q:'Подпись интригует/задаёт вопрос?'},
-            {q:'Репость в Stories?'},
-            {q:'Публикуешь в прайм-тайм?'}
+            {q:'CTA в конце (подписка/комментарий)?'},
+            {q:'3-5 хештегов добавлены?'},
+            {q:'Подпись интригует или задаёт вопрос?'},
+            {q:'Репост в Stories?'},
+            {q:'Публикуешь в прайм-тайм?'},
+            {q:'Говоришь про боли аудитории, а не про себя?'},
+            {q:'Есть ссылка на воронку (Telegram/сайт)?'}
         ];
 
         document.addEventListener('DOMContentLoaded', async () => {
@@ -341,7 +469,9 @@
             document.getElementById('tip-title').textContent = tip.t;
             document.getElementById('tip-text').textContent = tip.x;
             try { const r = await fetch('/api/courses'); allCourses = await r.json(); renderPlatforms(); renderCourses(); } catch(e) {}
-            if (user) { try { const r = await fetch('/api/stats/' + user.id); progress = await r.json(); updateStats(); } catch(e) {} }
+            if (user) {
+                try { const r = await fetch('/api/stats/' + user.id); progress = await r.json(); updateStats(); } catch(e) {}
+            }
             renderTemplates();
             renderChecklist();
         });
@@ -350,10 +480,12 @@
 
         function renderPlatforms() {
             const s = document.getElementById('platforms-scroll');
-            const p = [{id:'all',n:'Все'},{id:'instagram',n:'Instagram'},{id:'youtube',n:'YouTube'},{id:'tiktok',n:'TikTok'},{id:'ai',n:'AI'},{id:'general',n:'Общее'}];
-            s.innerHTML = p.map(x => '<div class="platform-chip ' + (x.id===activeFilter?'active':'') + '" onclick="filterPlatform(\'' + x.id + '\')">' + svg(platformIcons[x.id]) + ' ' + x.n + '</div>').join('');
+            const p = [{id:'all',n:'Все'},{id:'instagram',n:'Instagram'},{id:'youtube',n:'YouTube'},{id:'tiktok',n:'TikTok'},{id:'telegram',n:'Telegram'},{id:'ai',n:'AI'},{id:'general',n:'Общее'}];
+            s.innerHTML = p.map(x => '<div class="plat-chip ' + (x.id===activeFilter?'active':'') + '" onclick="filterPlatform(\'' + x.id + '\')">' + svg(platformIcons[x.id]) + ' ' + x.n + '</div>').join('');
         }
+
         function filterPlatform(id) { activeFilter = id; renderPlatforms(); renderCourses(); }
+
         function renderCourses() {
             const g = document.getElementById('courses-grid');
             const f = activeFilter === 'all' ? allCourses : allCourses.filter(c => c.platform === activeFilter);
@@ -361,23 +493,35 @@
                 const done = c.lessons.filter(l => progress.completedLessons && progress.completedLessons.includes(c.id + '-' + l.id)).length;
                 const pct = (done / c.lessons.length) * 100;
                 const iconKey = courseIcons[c.id] || 'book';
-                return '<div class="course-card animate-in" style="animation-delay:' + (i*.05) + 's" onclick="openCourse(\'' + c.id + '\')">' +
-                    '<div style="position:absolute;top:0;left:0;width:3px;height:100%;background:' + c.color + ';border-radius:3px 0 0 3px;"></div>' +
-                    '<div class="course-header"><div class="course-icon" style="background:' + c.color + '20;">' + svg(iconKey) + '</div><div class="course-info"><div class="course-title">' + c.title + '</div><div class="course-desc">' + c.description + '</div></div></div>' +
-                    '<div class="course-meta"><div class="course-meta-item">' + svg('book') + ' ' + c.lessons.length + ' уроков</div><div class="course-meta-item">' + svg('check') + ' ' + done + '/' + c.lessons.length + '</div></div>' +
-                    '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%;background:' + c.color + '"></div></div></div>';
+                const lvl = courseLevel[c.id] || 'start';
+                const lvlLabel = levelLabels[lvl];
+                const lvlClass = 'level-' + lvl;
+                return '<div class="course-card anim" style="animation-delay:' + (i*.04) + 's" onclick="openCourse(\'' + c.id + '\')">' +
+                    '<div class="course-card-accent" style="background:' + c.color + '"></div>' +
+                    '<div class="course-icon-wrap" style="background:' + c.color + '18;">' + svg(iconKey) + '</div>' +
+                    '<div class="course-body">' +
+                        '<div class="course-top"><div class="course-name">' + c.title + '</div><span class="level-badge ' + lvlClass + '">' + lvlLabel + '</span></div>' +
+                        '<div class="course-sub">' + c.description + '</div>' +
+                        '<div class="course-bottom">' +
+                            '<div class="course-stat">' + svg('book') + ' ' + c.lessons.length + ' уроков</div>' +
+                            '<div class="course-stat">' + svg('check') + ' ' + done + '/' + c.lessons.length + '</div>' +
+                        '</div>' +
+                        '<div class="course-progress"><div class="course-progress-fill" style="width:' + pct + '%;background:' + c.color + '"></div></div>' +
+                    '</div></div>';
             }).join('');
         }
+
         function openCourse(id) {
             currentCourse = allCourses.find(c => c.id === id);
             if (!currentCourse) return;
             document.getElementById('course-title').textContent = currentCourse.title;
             document.getElementById('lesson-list').innerHTML = currentCourse.lessons.map((l, i) => {
                 const done = progress.completedLessons && progress.completedLessons.includes(id + '-' + l.id);
-                return '<div class="lesson-item ' + (done?'completed':'') + '" onclick="openLesson(' + i + ')"><div class="lesson-number">' + (done ? svg('check') : (i+1)) + '</div><div class="lesson-content"><div class="lesson-title">' + l.title + '</div><div class="lesson-duration">' + svg('clock') + ' ' + l.duration + '</div></div><div class="lesson-check">' + (done ? svg('check') : '') + '</div></div>';
+                return '<div class="lesson-item ' + (done?'completed':'') + '" onclick="openLesson(' + i + ')"><div class="lesson-num">' + (done ? svg('check') : (i+1)) + '</div><div class="lesson-body"><div class="lesson-name">' + l.title + '</div><div class="lesson-dur">' + svg('clock') + ' ' + l.duration + '</div></div><div class="lesson-check">' + (done ? svg('check') : '') + '</div></div>';
             }).join('');
             showPage('course');
         }
+
         function openLesson(i) {
             if (!currentCourse) return;
             currentLesson = currentCourse.lessons[i];
@@ -391,6 +535,7 @@
             btn.className = 'complete-btn' + (done ? ' done' : '');
             showPage('lesson');
         }
+
         async function completeLesson() {
             if (!user || !currentCourse || !currentLesson) return;
             const btn = document.getElementById('complete-btn');
@@ -402,14 +547,20 @@
                 if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
             } catch(e) {}
         }
+
         function updateStats() {
-            document.getElementById('lessons-done').textContent = progress.totalCompleted||0;
-            document.getElementById('xp-count').textContent = progress.xp||0;
-            document.getElementById('level-count').textContent = progress.level||1;
-            document.getElementById('streak-count').textContent = (progress.streak||0) + ' дней подряд';
-            document.getElementById('p-streak').textContent = progress.streak||0;
-            document.getElementById('p-lessons').textContent = progress.totalCompleted||0;
-            document.getElementById('p-xp').textContent = progress.xp||0;
+            const completed = progress.totalCompleted || 0;
+            document.getElementById('lessons-done').textContent = completed;
+            document.getElementById('xp-count').textContent = progress.xp || 0;
+            document.getElementById('level-count').textContent = progress.level || 1;
+            document.getElementById('streak-count').textContent = (progress.streak || 0) + ' дней подряд';
+            document.getElementById('p-streak').textContent = progress.streak || 0;
+            document.getElementById('p-lessons').textContent = completed;
+            document.getElementById('p-xp').textContent = progress.xp || 0;
+            if (completed > 0) {
+                document.getElementById('streak-bar').style.display = 'flex';
+                document.getElementById('stats-row').style.display = 'flex';
+            }
         }
 
         async function sendMsg() {
@@ -429,7 +580,9 @@
                 addChatMsg('Извини, произошла ошибка. Попробуй ещё раз.', 'ai');
             }
         }
+
         function sendQuick(q) { document.getElementById('chat-input').value = q; sendMsg(); }
+
         function addChatMsg(text, type, id) {
             const box = document.getElementById('chat-messages');
             const label = type === 'ai' ? '<span class="ai-label">' + svg('bot') + 'Наставник</span>' : '';
@@ -442,27 +595,31 @@
         }
 
         function openTool(name) { showPage(name); }
+
         function genIdeas(niche) {
             const ideas = ideasDB[niche] || [];
-            document.getElementById('ideas-output').innerHTML = '<div class="section-title">Идеи для ' + niche + '</div>' + ideas.map(i => '<div class="template-card"><div class="template-title">' + svg('lightbulb') + ' ' + i + '</div><div class="template-desc">Используй как тему для Reels, поста или видео</div></div>').join('');
+            document.getElementById('ideas-output').innerHTML = '<div class="section-title" style="margin:16px 0 10px">' + niche.charAt(0).toUpperCase() + niche.slice(1) + '</div>' + ideas.map(i => '<div class="course-card" style="cursor:default;margin-bottom:8px"><div class="course-icon-wrap" style="background:rgba(201,168,76,0.1);">' + svg('lightbulb') + '</div><div class="course-body"><div class="course-name">' + i + '</div><div class="course-sub">Используй как тему для Reels, поста или видео</div></div></div>').join('');
         }
+
         function renderTemplates() {
-            document.getElementById('templates-output').innerHTML = templates.map(t => '<div class="template-card" onclick="showAlert(\'' + t.desc.replace(/'/g,"\\'") + '\')"><div class="template-title">' + svg('file') + ' ' + t.title + '</div><div class="template-desc">' + t.desc + '</div><div class="template-tag" style="background:rgba(201,168,76,0.15);color:var(--accent)">' + t.tag + '</div></div>').join('');
+            document.getElementById('templates-output').innerHTML = templates.map(t => '<div class="course-card" style="cursor:default;margin-bottom:8px" onclick="showAlert(\'' + t.desc.replace(/'/g,"\\'") + '\')"><div class="course-icon-wrap" style="background:rgba(201,168,76,0.1);">' + svg('file') + '</div><div class="course-body"><div class="course-top"><div class="course-name">' + t.title + '</div><span class="level-badge level-grow">' + t.tag + '</span></div><div class="course-sub">' + t.desc + '</div></div></div>').join('');
         }
+
         function renderChecklist() {
-            document.getElementById('checklist-output').innerHTML = '<div class="section-title">Проверь свой пост перед публикацией</div>' + checklist.map((c, i) => '<div class="template-card" onclick="this.classList.toggle(\'checked\')"><div class="template-title">' + svg('check') + ' ' + (i+1) + '. ' + c.q + '</div></div>').join('');
+            document.getElementById('checklist-output').innerHTML = '<div style="margin-bottom:12px;color:var(--text2);font-size:13px">Нажми на пункт, чтобы отметить</div>' + checklist.map((c, i) => '<div class="course-card" style="cursor:pointer;margin-bottom:8px" onclick="this.classList.toggle(\'checked\');this.querySelector(\'.lesson-num\').style.background=this.classList.contains(\'checked\')?\'var(--accent)\':\'var(--bg2)\';this.querySelector(\'.lesson-num\').style.color=this.classList.contains(\'checked\')?\'#000\':\'var(--text)\'"><div class="lesson-num" style="width:32px;height:32px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0">' + svg('check') + '</div><div class="course-body"><div class="course-name">' + (i+1) + '. ' + c.q + '</div></div></div>').join('');
         }
 
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             var el = document.getElementById(page + '-page');
             if (el) el.classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(n => n.classList.remove('active'));
             var nav = document.querySelector('[data-page="' + page + '"]');
             if (nav) nav.classList.add('active');
             if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
             window.scrollTo(0, 0);
         }
+
         function showAlert(text) { if (tg && tg.showAlert) tg.showAlert(text); else alert(text); }
     </script>
 </body>
