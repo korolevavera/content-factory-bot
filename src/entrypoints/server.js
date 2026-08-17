@@ -8,7 +8,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..', '..', 'public')));
+app.use(express.static(path.join(__dirname, '..', '..', 'public'), { setHeaders: (res, path) => {
+  if (path.endsWith('.html')) {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  }
+}}));
 
 app.get('/api/courses', (req, res) => {
   const courses = CourseService.getAllCourses();
@@ -60,6 +64,7 @@ app.post('/api/ai-mentor', (req, res) => {
 });
 
 app.get('*', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
 });
 
