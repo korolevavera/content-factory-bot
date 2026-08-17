@@ -26,7 +26,7 @@ const courses = [
         id: 3, title: 'Съёмка на телефон', duration: '8 мин',
         content: '<p>Профессиональная камера не нужна. <b>Хватит смартфона</b> и 5 простых правил:</p>' +
         '<ol class="steps"><li><b>Освещение</b> — снимай у окна или купи кольцевую лампу за <span class="money">500₽</span>. Свет = <span class="num">70%</span> качества.</li><li><b>Формат 9:16</b> — только вертикально. Горизонтально = мусор.</li><li><b>Стабилизация</b> — держи двумя руками или купи штатив за <span class="money">300-500₽</span>.</li><li><b>Чисти камеру</b> — протри перед съёмкой. Грязное стекло = мыло.</li><li><b>Разрешение</b> — снимай в <span class="num">4K</span> если позволяет телефон.</li></ol>' +
-        '<div class="callout warning"><div class="callout-title">⚠️ Частая ошибка</div><div class="callout-text"><span class="danger">Не снимай против света</span> — лицо будет тёмным. Всегда光源 должен быть <b>перед тобой</b> или сбоку.</div></div>' +
+        '<div class="callout warning"><div class="callout-title">⚠️ Частая ошибка</div><div class="callout-text"><span class="danger">Не снимай против света</span> — лицо будет тёмным. Всегда свет должен быть <b>перед тобой</b> или сбоку.</div></div>' +
         '<div class="callout formula"><div class="callout-title">💰 Минимальный набор</div><div class="callout-text">Смартфон + штатив <span class="money">500₽</span> + кольцевая лампа <span class="money">500₽</span> = <b>итого <span class="money">1000₽</span></b> для старта.</div></div>'
       },
       {
@@ -264,7 +264,7 @@ const courses = [
       {
         id: 7, title: 'SEO и заголовки', duration: '7 мин',
         content: '<p><b>SEO на YouTube</b> — как тебя находят в поиске:</p>' +
-        '<ol class="steps"><li><b>Ключевые слова</b> — вбивай в YouTube Search, смотри подсказки</li><li><b>Заголовок</b> — ключевое слово + интрига. Максимум <span class="num">60 символов</span>.</li><li><b>Описание</b> — первые <span class="num">2 строки</span>最关键 (появляются в поиске)</li><li><b>Теги</b> — релевантные ключевые слова</li><li><b>Субтитры</b> — помогают с SEO</li></ol>' +
+        '<ol class="steps"><li><b>Ключевые слова</b> — вбивай в YouTube Search, смотри подсказки</li><li><b>Заголовок</b> — ключевое слово + интрига. Максимум <span class="num">60 символов</span>.</li><li><b>Описание</b> — первые <span class="num">2 строки</span> — самые важные (появляются в поиске)</li><li><b>Теги</b> — релевантные ключевые слова</li><li><b>Субтитры</b> — помогают с SEO</li></ol>' +
         '<div class="callout formula"><div class="callout-title">📐 Формула заголовка</div><div class="callout-text"><span class="formula">Ключевое слово + Интрига + Число</span><br>"Как заработать на YouTube: <span class="num">5</span> способов для новичков"</div></div>'
       },
       {

@@ -575,7 +575,7 @@
         const platforms = [
             { id:'instagram', name:'Instagram', desc:'Reels, карусели, Stories, рост подписчиков', icon:'instagram', color:'#E1306C', courses:['ig-reels','ig-carousels','ig-stories','ig-growth'] },
             { id:'youtube', name:'YouTube', desc:'Длинные видео, Shorts, монетизация', icon:'youtube', color:'#FF0000', courses:['yt-basics','yt-shorts'] },
-            { id:'tiktok', name:'TikTok', desc:'Вирусные видео, бизнес в TikTok', icon:'tiktok', color:'#010101', courses:['tiktok-viral','tiktok-business'] },
+            { id:'tiktok', name:'TikTok', desc:'Вирусные видео, бизнес в TikTok', icon:'tiktok', color:'#25F4EE', courses:['tiktok-viral','tiktok-business'] },
             { id:'telegram', name:'Telegram', desc:'Канал, боты, монетизация', icon:'send', color:'#0088CC', courses:['tg-channel'] },
             { id:'base', name:'Общее', desc:'Стратегия, монетизация, дизайн', icon:'chart', color:'#10B981', courses:['content-strategy','monetization','design-basics'] },
             { id:'ai', name:'AI-инструменты', desc:'Нейросети для контента и промпты', icon:'sparkle', color:'#6366F1', courses:['ai-content','ai-prompts'] }
@@ -815,7 +815,11 @@
             document.getElementById('ideas-output').innerHTML = '<div style="font-size:14px;font-weight:700;margin:16px 0 10px">' + niche.charAt(0).toUpperCase() + niche.slice(1) + '</div>' + ideas.map(i => '<div class="course-card" style="cursor:default;margin-bottom:8px"><div class="course-top"><div class="course-name">' + svg('lightbulb') + ' ' + i + '</div></div><div class="course-sub">Используй как тему для Reels, поста или видео</div></div>').join('');
         }
         function renderTemplates() {
-            document.getElementById('templates-output').innerHTML = templates.map(t => '<div class="course-card" style="cursor:default;margin-bottom:8px" onclick="showAlert(\'' + t.desc.replace(/'/g,"\\'") + '\')"><div class="course-top"><div class="course-name">' + svg('file') + ' ' + t.title + '</div><span class="lvl lvl-2">' + t.tag + '</span></div><div class="course-sub">' + t.desc + '</div></div>').join('');
+            document.getElementById('templates-output').innerHTML = templates.map((t, i) => '<div class="course-card" style="cursor:pointer;margin-bottom:8px" onclick="copyTemplate(' + i + ')"><div class="course-top"><div class="course-name">' + svg('file') + ' ' + t.title + '</div><span class="lvl lvl-2">' + t.tag + '</span></div><div class="course-sub">' + t.desc + '</div><div style="font-size:11px;color:var(--accent);margin-top:6px;opacity:0.7">Нажми, чтобы скопировать</div></div>').join('');
+        }
+        function copyTemplate(i) {
+            const t = templates[i];
+            navigator.clipboard?.writeText(t.desc).then(() => showCopyToast()).catch(() => showAlert(t.desc));
         }
         function renderChecklist() {
             const state = getChecklistState();
