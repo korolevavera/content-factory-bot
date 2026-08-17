@@ -8,338 +8,116 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg: #0a0a0f;
-            --bg2: #12121a;
-            --bg3: #1a1a25;
-            --bg4: #222230;
-            --text: #ffffff;
-            --text2: #8b8b9e;
-            --accent: #6c5ce7;
-            --accent2: #a29bfe;
-            --green: #10b981;
-            --red: #ef4444;
-            --yellow: #f59e0b;
-            --radius: 16px;
-        }
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
+        :root { --bg: #0a0a0f; --bg2: #12121a; --bg3: #1a1a25; --bg4: #222230; --text: #fff; --text2: #8b8b9e; --accent: #6c5ce7; --accent2: #a29bfe; --green: #10b981; --radius: 16px; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
         .app { max-width: 480px; margin: 0 auto; padding: 0 16px 100px; }
-        .page { display: none; }
-        .page.active { display: block; }
-
+        .page { display: none; } .page.active { display: block; }
         .header { padding: 24px 0 16px; text-align: center; }
         .logo { font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #6c5ce7, #a29bfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .subtitle { color: var(--text2); font-size: 13px; margin-top: 4px; }
-
-        .streak-banner {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-            border-radius: var(--radius);
-            padding: 16px 20px;
-            margin: 16px 0;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .streak-fire { font-size: 36px; }
-        .streak-info h3 { font-size: 16px; font-weight: 700; }
-        .streak-info p { font-size: 12px; opacity: 0.9; }
-
+        .streak-banner { background: linear-gradient(135deg, #6c5ce7, #a29bfe); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; display: flex; align-items: center; gap: 14px; }
+        .streak-fire { font-size: 36px; } .streak-info h3 { font-size: 16px; font-weight: 700; } .streak-info p { font-size: 12px; opacity: 0.9; }
         .stats-bar { display: flex; gap: 10px; margin: 16px 0; }
-        .stat-card {
-            flex: 1;
-            background: var(--bg3);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .stat-icon { font-size: 20px; margin-bottom: 6px; }
-        .stat-value { font-size: 22px; font-weight: 700; }
-        .stat-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
-
+        .stat-card { flex: 1; background: var(--bg3); border-radius: 14px; padding: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.04); }
+        .stat-icon { font-size: 20px; margin-bottom: 6px; } .stat-value { font-size: 22px; font-weight: 700; } .stat-label { font-size: 11px; color: var(--text2); margin-top: 2px; }
         .section-title { font-size: 16px; font-weight: 700; margin: 20px 0 12px; }
-
-        .platforms-scroll {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 4px 0 12px;
-            -webkit-overflow-scrolling: touch;
-        }
+        .platforms-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 4px 0 12px; -webkit-overflow-scrolling: touch; }
         .platforms-scroll::-webkit-scrollbar { display: none; }
-
-        .platform-chip {
-            flex-shrink: 0;
-            padding: 10px 18px;
-            border-radius: 24px;
-            background: var(--bg3);
-            border: 1px solid rgba(255,255,255,0.06);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .platform-chip:active { transform: scale(0.96); }
-        .platform-chip.active { background: var(--accent); border-color: var(--accent); }
-        .platform-chip .chip-icon { font-size: 16px; }
-
+        .platform-chip { flex-shrink: 0; padding: 10px 18px; border-radius: 24px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.06); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+        .platform-chip:active { transform: scale(0.96); } .platform-chip.active { background: var(--accent); border-color: var(--accent); }
         .courses-grid { display: flex; flex-direction: column; gap: 12px; }
-
-        .course-card {
-            background: var(--bg3);
-            border-radius: var(--radius);
-            padding: 18px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid rgba(255,255,255,0.04);
-            position: relative;
-            overflow: hidden;
-        }
-        .course-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 3px; height: 100%;
-        }
+        .course-card { background: var(--bg3); border-radius: var(--radius); padding: 18px; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.04); position: relative; overflow: hidden; }
         .course-card:active { transform: scale(0.98); background: var(--bg4); }
-
         .course-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .course-icon {
-            width: 44px; height: 44px;
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px;
-        }
-        .course-info { flex: 1; }
-        .course-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
-        .course-desc { font-size: 12px; color: var(--text2); }
-
+        .course-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .course-info { flex: 1; } .course-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; } .course-desc { font-size: 12px; color: var(--text2); }
         .course-meta { display: flex; gap: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.04); }
         .course-meta-item { font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 5px; }
-
         .progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 12px; overflow: hidden; }
         .progress-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
-
         .lesson-list { display: flex; flex-direction: column; gap: 8px; }
-
-        .lesson-item {
-            background: var(--bg3);
-            border-radius: 12px;
-            padding: 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .lesson-item:active { transform: scale(0.98); }
-        .lesson-item.completed { border-color: rgba(108,92,231,0.3); background: rgba(108,92,231,0.08); }
-
-        .lesson-number {
-            width: 30px; height: 30px;
-            border-radius: 8px;
-            background: var(--bg2);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px; font-weight: 600;
-            flex-shrink: 0;
-        }
+        .lesson-item { background: var(--bg3); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.04); }
+        .lesson-item:active { transform: scale(0.98); } .lesson-item.completed { border-color: rgba(108,92,231,0.3); background: rgba(108,92,231,0.08); }
+        .lesson-number { width: 30px; height: 30px; border-radius: 8px; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
         .lesson-item.completed .lesson-number { background: var(--accent); }
-        .lesson-content { flex: 1; }
-        .lesson-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-        .lesson-duration { font-size: 11px; color: var(--text2); }
-        .lesson-check {
-            width: 18px; height: 18px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.15);
-        }
-        .lesson-item.completed .lesson-check {
-            background: var(--accent);
-            border-color: var(--accent);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .lesson-item.completed .lesson-check::after {
-            content: '✓'; color: white; font-size: 10px; font-weight: 700;
-        }
-
-        .modal-header {
-            padding: 16px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            position: sticky; top: 0;
-            background: var(--bg); z-index: 10;
-        }
-        .back-btn {
-            width: 34px; height: 34px;
-            border-radius: 10px;
-            background: var(--bg3);
-            border: none; color: var(--text);
-            font-size: 16px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .lesson-content { flex: 1; } .lesson-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; } .lesson-duration { font-size: 11px; color: var(--text2); }
+        .lesson-check { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); }
+        .lesson-item.completed .lesson-check { background: var(--accent); border-color: var(--accent); display: flex; align-items: center; justify-content: center; }
+        .lesson-item.completed .lesson-check::after { content: '✓'; color: white; font-size: 10px; font-weight: 700; }
+        .modal-header { padding: 16px 0; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); position: sticky; top: 0; background: var(--bg); z-index: 10; }
+        .back-btn { width: 34px; height: 34px; border-radius: 10px; background: var(--bg3); border: none; color: var(--text); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .modal-title { font-size: 17px; font-weight: 700; flex: 1; }
-
         .lesson-detail { background: var(--bg3); border-radius: var(--radius); padding: 20px; margin: 16px 0; }
         .lesson-detail-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
         .lesson-detail-meta { color: var(--text2); font-size: 12px; margin-bottom: 14px; }
-        .lesson-detail-content { color: var(--text2); font-size: 14px; line-height: 1.6; }
-        .lesson-detail-content p { margin-bottom: 10px; }
+        .lesson-detail-content { color: var(--text2); font-size: 14px; line-height: 1.7; }
+        .lesson-detail-content p { margin-bottom: 12px; }
+        .complete-btn { width: 100%; padding: 14px; border-radius: var(--radius); background: linear-gradient(135deg, #6c5ce7, #a29bfe); border: none; color: white; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .complete-btn:active { transform: scale(0.98); } .complete-btn.done { background: var(--bg3); color: var(--accent); }
+        .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .tool-card { background: var(--bg3); border-radius: 14px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.04); }
+        .tool-card:active { transform: scale(0.96); }
+        .tool-icon { font-size: 28px; margin-bottom: 8px; } .tool-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; } .tool-desc { font-size: 11px; color: var(--text2); }
+        .tip-card { background: var(--bg3); border-radius: var(--radius); padding: 18px; margin-bottom: 12px; border-left: 3px solid var(--accent); }
+        .tip-badge { display: inline-block; background: rgba(108,92,231,0.2); color: var(--accent2); padding: 3px 10px; border-radius: 8px; font-size: 10px; font-weight: 600; margin-bottom: 10px; }
+        .tip-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; } .tip-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
 
-        .complete-btn {
-            width: 100%; padding: 14px;
-            border-radius: var(--radius);
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-            border: none; color: white;
-            font-size: 15px; font-weight: 600;
-            cursor: pointer; transition: all 0.2s;
-        }
-        .complete-btn:active { transform: scale(0.98); }
-        .complete-btn.done { background: var(--bg3); color: var(--accent); }
+        .chat-container { display: flex; flex-direction: column; height: calc(100vh - 140px); }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 16px 0; display: flex; flex-direction: column; gap: 12px; }
+        .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.5; }
+        .chat-msg.user { background: var(--accent); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg.ai { background: var(--bg3); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(255,255,255,0.06); }
+        .chat-msg.ai .ai-label { font-size: 10px; color: var(--accent2); font-weight: 600; margin-bottom: 6px; display: block; }
+        .chat-input-wrap { padding: 12px 0; display: flex; gap: 8px; }
+        .chat-input { flex: 1; background: var(--bg3); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; padding: 12px 16px; color: var(--text); font-size: 14px; font-family: inherit; outline: none; resize: none; }
+        .chat-input::placeholder { color: var(--text2); }
+        .chat-send { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); border: none; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .chat-send:active { transform: scale(0.95); }
+        .quick-questions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+        .quick-q { padding: 8px 14px; border-radius: 20px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.06); color: var(--text2); font-size: 12px; cursor: pointer; transition: all 0.2s; }
+        .quick-q:active { background: var(--accent); color: white; }
 
-        .premium-card {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: var(--radius);
-            padding: 22px;
-            margin: 16px 0;
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-        .premium-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            color: #000; padding: 4px 12px;
-            border-radius: 20px; font-size: 10px;
-            font-weight: 700; text-transform: uppercase;
-            margin-bottom: 10px;
-        }
+        .tool-page-content { padding: 16px 0; }
+        .template-card { background: var(--bg3); border-radius: 12px; padding: 16px; margin-bottom: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.04); }
+        .template-card:active { background: var(--bg4); }
+        .template-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .template-desc { font-size: 12px; color: var(--text2); }
+        .template-tag { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600; margin-top: 8px; }
+
+        .premium-card { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: var(--radius); padding: 22px; margin: 16px 0; border: 1px solid rgba(255,215,0,0.2); }
+        .premium-badge { display: inline-block; background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
         .premium-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
         .premium-desc { font-size: 12px; color: var(--text2); margin-bottom: 14px; line-height: 1.5; }
         .premium-price { font-size: 26px; font-weight: 800; margin-bottom: 14px; }
         .premium-price span { font-size: 13px; font-weight: 400; color: var(--text2); }
-        .premium-btn {
-            width: 100%; padding: 13px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            border: none; color: #000;
-            font-size: 14px; font-weight: 700; cursor: pointer;
-        }
-
+        .premium-btn { width: 100%; padding: 13px; border-radius: 12px; background: linear-gradient(135deg, #ffd700, #ff8c00); border: none; color: #000; font-size: 14px; font-weight: 700; cursor: pointer; }
         .profile-header { text-align: center; padding: 24px 0; }
-        .avatar {
-            width: 72px; height: 72px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-            margin: 0 auto 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 32px;
-        }
-        .profile-name { font-size: 18px; font-weight: 700; }
-        .profile-id { font-size: 12px; color: var(--text2); }
-
+        .avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #6c5ce7, #a29bfe); margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+        .profile-name { font-size: 18px; font-weight: 700; } .profile-id { font-size: 12px; color: var(--text2); }
         .settings-list { display: flex; flex-direction: column; gap: 8px; }
-        .settings-item {
-            background: var(--bg3);
-            border-radius: 12px;
-            padding: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-        }
+        .settings-item { background: var(--bg3); border-radius: 12px; padding: 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
         .settings-left { display: flex; align-items: center; gap: 12px; }
-        .settings-icon {
-            width: 34px; height: 34px;
-            border-radius: 10px;
-            background: var(--bg2);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px;
-        }
-        .settings-text { font-size: 13px; font-weight: 500; }
-        .settings-arrow { color: var(--text2); font-size: 14px; }
-
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: var(--bg2);
-            border-top: 1px solid rgba(255,255,255,0.04);
-            display: flex; justify-content: center;
-            padding: 10px 16px;
-            padding-bottom: max(10px, env(safe-area-inset-bottom));
-            z-index: 50;
-        }
-        .nav-items {
-            display: flex; gap: 6px;
-            background: var(--bg3);
-            border-radius: 18px; padding: 6px;
-        }
-        .nav-item {
-            padding: 8px 16px;
-            border-radius: 12px;
-            border: none; background: transparent;
-            color: var(--text2);
-            font-size: 11px; font-weight: 500;
-            cursor: pointer; transition: all 0.2s;
-            display: flex; align-items: center; gap: 5px;
-        }
+        .settings-icon { width: 34px; height: 34px; border-radius: 10px; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .settings-text { font-size: 13px; font-weight: 500; } .settings-arrow { color: var(--text2); font-size: 14px; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg2); border-top: 1px solid rgba(255,255,255,0.04); display: flex; justify-content: center; padding: 10px 16px; padding-bottom: max(10px, env(safe-area-inset-bottom)); z-index: 50; }
+        .nav-items { display: flex; gap: 4px; background: var(--bg3); border-radius: 18px; padding: 5px; }
+        .nav-item { padding: 8px 12px; border-radius: 12px; border: none; background: transparent; color: var(--text2); font-size: 10px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 4px; }
         .nav-item.active { background: var(--accent); color: white; }
-        .nav-item svg { width: 16px; height: 16px; }
-
-        .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .tool-card {
-            background: var(--bg3);
-            border-radius: 14px;
-            padding: 18px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .tool-card:active { transform: scale(0.96); }
-        .tool-icon { font-size: 28px; margin-bottom: 8px; }
-        .tool-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-        .tool-desc { font-size: 11px; color: var(--text2); }
-
-        .tip-card {
-            background: var(--bg3);
-            border-radius: var(--radius);
-            padding: 18px;
-            margin-bottom: 12px;
-            border-left: 3px solid var(--accent);
-        }
-        .tip-badge {
-            display: inline-block;
-            background: rgba(108,92,231,0.2);
-            color: var(--accent2);
-            padding: 3px 10px;
-            border-radius: 8px;
-            font-size: 10px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .tip-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-        .tip-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
-
+        .nav-item svg { width: 14px; height: 14px; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .animate-in { animation: fadeIn 0.3s ease forwards; }
+        .loading-dots::after { content: ''; animation: dots 1.5s infinite; }
+        @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60%, 100% { content: '...'; } }
     </style>
 </head>
 <body>
     <div class="app">
+        <!-- HOME -->
         <div id="home-page" class="page active">
             <div class="header animate-in">
                 <div class="logo">Content Factory</div>
                 <div class="subtitle">Из новичка — в звезду соцсетей</div>
             </div>
-
             <div class="streak-banner animate-in">
                 <div class="streak-fire">🔥</div>
                 <div class="streak-info">
@@ -347,195 +125,130 @@
                     <p>Учись каждый день!</p>
                 </div>
             </div>
-
             <div class="stats-bar animate-in">
-                <div class="stat-card">
-                    <div class="stat-icon">📚</div>
-                    <div class="stat-value" id="lessons-done">0</div>
-                    <div class="stat-label">Уроков</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">⭐</div>
-                    <div class="stat-value" id="xp-count">0</div>
-                    <div class="stat-label">XP</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🏆</div>
-                    <div class="stat-value" id="level-count">1</div>
-                    <div class="stat-label">Уровень</div>
-                </div>
+                <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-value" id="lessons-done">0</div><div class="stat-label">Уроков</div></div>
+                <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-value" id="xp-count">0</div><div class="stat-label">XP</div></div>
+                <div class="stat-card"><div class="stat-icon">🏆</div><div class="stat-value" id="level-count">1</div><div class="stat-label">Уровень</div></div>
             </div>
-
             <div class="section-title">Платформы</div>
-            <div class="platforms-scroll" id="platforms-scroll">
-                <div class="platform-chip active" onclick="filterPlatform('all')">
-                    <span class="chip-icon">🎓</span> Все
-                </div>
-            </div>
-
+            <div class="platforms-scroll" id="platforms-scroll"></div>
             <div class="section-title">Курсы</div>
             <div class="courses-grid" id="courses-grid"></div>
-
             <div class="section-title">Инструменты</div>
             <div class="tools-grid">
-                <div class="tool-card" onclick="showAlert('Скоро: AI-генератор идей для контента')">
-                    <div class="tool-icon">💡</div>
-                    <div class="tool-name">Генератор идей</div>
-                    <div class="tool-desc">AI подберёт темы</div>
-                </div>
-                <div class="tool-card" onclick="showAlert('Скoro: Планировщик постов')">
-                    <div class="tool-icon">📅</div>
-                    <div class="tool-name">Планировщик</div>
-                    <div class="tool-desc">Контент-план на месяц</div>
-                </div>
-                <div class="tool-card" onclick="showAlert('Скоро: Проверка профиля')">
-                    <div class="tool-icon">📊</div>
-                    <div class="tool-name">Аудит профиля</div>
-                    <div class="tool-desc">Оценка аккаунта</div>
-                </div>
-                <div class="tool-card" onclick="showAlert('Скоро: Шаблоны постов')">
-                    <div class="tool-icon">📝</div>
-                    <div class="tool-name">Шаблоны</div>
-                    <div class="tool-desc">Готовые тексты</div>
-                </div>
+                <div class="tool-card" onclick="showPage('mentor')"><div class="tool-icon">🤖</div><div class="tool-name">AI-Наставник</div><div class="tool-desc">Задай вопрос</div></div>
+                <div class="tool-card" onclick="openTool('ideas')"><div class="tool-icon">💡</div><div class="tool-name">Генератор идей</div><div class="tool-desc">Темы для контента</div></div>
+                <div class="tool-card" onclick="openTool('templates')"><div class="tool-icon">📝</div><div class="tool-name">Шаблоны</div><div class="tool-desc">Готовые тексты</div></div>
+                <div class="tool-card" onclick="openTool('checklist')"><div class="tool-icon">✅</div><div class="tool-name">Чеклисты</div><div class="tool-desc">Проверь пост</div></div>
             </div>
-
             <div class="section-title">Совет дня</div>
             <div class="tip-card">
                 <div class="tip-badge">Совет</div>
-                <div class="tip-title" id="tip-title">Публикуй в прайм-тайм</div>
-                <div class="tip-text" id="tip-text">Лучшее время для постов — 12:00-14:00 и 18:00-21:00. Твоя аудитория most активна в это время.</div>
+                <div class="tip-title" id="tip-title"></div>
+                <div class="tip-text" id="tip-text"></div>
             </div>
         </div>
 
+        <!-- COURSE -->
         <div id="course-page" class="page">
-            <div class="modal-header">
-                <button class="back-btn" onclick="showPage('home')">←</button>
-                <div class="modal-title" id="course-title">Курс</div>
-            </div>
-            <div style="padding: 16px 0;">
-                <div class="lesson-list" id="lesson-list"></div>
-            </div>
+            <div class="modal-header"><button class="back-btn" onclick="showPage('home')">←</button><div class="modal-title" id="course-title"></div></div>
+            <div style="padding:16px 0"><div class="lesson-list" id="lesson-list"></div></div>
         </div>
 
+        <!-- LESSON -->
         <div id="lesson-page" class="page">
-            <div class="modal-header">
-                <button class="back-btn" onclick="showPage('course')">←</button>
-                <div class="modal-title" id="lesson-title">Урок</div>
-            </div>
-            <div style="padding: 16px 0;">
-                <div class="lesson-detail">
-                    <div class="lesson-detail-title" id="detail-title"></div>
-                    <div class="lesson-detail-meta" id="detail-meta"></div>
-                    <div class="lesson-detail-content" id="detail-content"></div>
-                </div>
+            <div class="modal-header"><button class="back-btn" onclick="showPage('course')">←</button><div class="modal-title" id="lesson-title"></div></div>
+            <div style="padding:16px 0">
+                <div class="lesson-detail"><div class="lesson-detail-title" id="detail-title"></div><div class="lesson-detail-meta" id="detail-meta"></div><div class="lesson-detail-content" id="detail-content"></div></div>
                 <button class="complete-btn" id="complete-btn" onclick="completeLesson()">Завершить урок</button>
             </div>
         </div>
 
-        <div id="premium-page" class="page">
-            <div class="modal-header">
-                <button class="back-btn" onclick="showPage('home')">←</button>
-                <div class="modal-title">Premium</div>
-            </div>
-            <div style="padding: 16px 0;">
-                <div class="premium-card">
-                    <div class="premium-badge">Premium</div>
-                    <div class="premium-title">Content Factory Pro</div>
-                    <div class="premium-desc">Полный доступ ко всем курсам, AI-наставник, индивидуальные разборы работ и сертификаты</div>
-                    <div class="premium-price">299₽ <span>/ месяц</span></div>
-                    <button class="premium-btn" onclick="showAlert('Оплата скоро будет доступна!')">Получить Premium</button>
+        <!-- AI MENTOR -->
+        <div id="mentor-page" class="page">
+            <div class="modal-header"><button class="back-btn" onclick="showPage('home')">←</button><div class="modal-title">AI-Наставник</div></div>
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-msg ai"><span class="ai-label">🤖 Наставник</span>Привет! Я твой AI-наставник по контенту. Спроси как сделать Reels, начать YouTube, заработать на блоге или расти в TikTok!</div>
+                    <div class="quick-questions">
+                        <div class="quick-q" onclick="sendQuick('Как сделать вирусный Reels?')">Reels</div>
+                        <div class="quick-q" onclick="sendQuick('Как начать YouTube?')">YouTube</div>
+                        <div class="quick-q" onclick="sendQuick('Как заработать на контенте?')">Заработок</div>
+                        <div class="quick-q" onclick="sendQuick('Как расти в TikTok?')">TikTok</div>
+                        <div class="quick-q" onclick="sendQuick('Какие инструменты бесплатные?')">Инструменты</div>
+                    </div>
                 </div>
-
-                <div class="section-title">Premium включает:</div>
-                <div class="settings-list">
-                    <div class="settings-item">
-                        <div class="settings-left">
-                            <div class="settings-icon">🎓</div>
-                            <div class="settings-text">Все курсы без ограничений</div>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <div class="settings-left">
-                            <div class="settings-icon">🤖</div>
-                            <div class="settings-text">AI-наставник 24/7</div>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <div class="settings-left">
-                            <div class="settings-icon">📸</div>
-                            <div class="settings-text">Разборы работ</div>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <div class="settings-left">
-                            <div class="settings-icon">🏆</div>
-                            <div class="settings-text">Сертификаты</div>
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <div class="settings-left">
-                            <div class="settings-icon">💬</div>
-                            <div class="settings-text">Закрытое комьюнити</div>
-                        </div>
-                    </div>
+                <div class="chat-input-wrap">
+                    <input class="chat-input" id="chat-input" placeholder="Задай вопрос..." onkeydown="if(event.key==='Enter')sendMsg()">
+                    <button class="chat-send" onclick="sendMsg()">➤</button>
                 </div>
             </div>
         </div>
 
-        <div id="profile-page" class="page">
-            <div class="modal-header">
-                <div class="modal-title">Профиль</div>
+        <!-- TOOL: IDEAS -->
+        <div id="ideas-page" class="page">
+            <div class="modal-header"><button class="back-btn" onclick="showPage('home')">←</button><div class="modal-title">Генератор идей</div></div>
+            <div class="tool-page-content">
+                <div class="section-title">Выбери нишу</div>
+                <div class="quick-questions" id="niche-btns">
+                    <div class="quick-q" onclick="genIdeas('кулинария')">🍳 Кулинария</div>
+                    <div class="quick-q" onclick="genIdeas('путешествия')">✈️ Путешествия</div>
+                    <div class="quick-q" onclick="genIdeas('мода')">👗 Мода</div>
+                    <div class="quick-q" onclick="genIdeas('технологии')">💻 Технологии</div>
+                    <div class="quick-q" onclick="genIdeas('фитнес')">💪 Фитнес</div>
+                    <div class="quick-q" onclick="genIdeas('бизнес')">💼 Бизнес</div>
+                    <div class="quick-q" onclick="genIdeas('образование')">📚 Образование</div>
+                    <div class="quick-q" onclick="genIdeas('красота')">💄 Красота</div>
+                </div>
+                <div id="ideas-output"></div>
             </div>
-            <div style="padding: 16px 0;">
+        </div>
+
+        <!-- TOOL: TEMPLATES -->
+        <div id="templates-page" class="page">
+            <div class="modal-header"><button class="back-btn" onclick="showPage('home')">←</button><div class="modal-title">Шаблоны</div></div>
+            <div class="tool-page-content" id="templates-output"></div>
+        </div>
+
+        <!-- TOOL: CHECKLIST -->
+        <div id="checklist-page" class="page">
+            <div class="modal-header"><button class="back-btn" onclick="showPage('home')">←</button><div class="modal-title">Чеклист поста</div></div>
+            <div class="tool-page-content" id="checklist-output"></div>
+        </div>
+
+        <!-- PREMIUM -->
+        <div id="premium-page" class="page">
+            <div class="modal-header"><button class="back-btn" onclick="showPage('home')">←</button><div class="modal-title">Premium</div></div>
+            <div style="padding:16px 0">
+                <div class="premium-card">
+                    <div class="premium-badge">Premium</div>
+                    <div class="premium-title">Content Factory Pro</div>
+                    <div class="premium-desc">Полный доступ, AI-наставник без ограничений, индивидуальные разборы</div>
+                    <div class="premium-price">299₽ <span>/ месяц</span></div>
+                    <button class="premium-btn" onclick="showAlert('Скоро будет доступно!')">Получить Premium</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE -->
+        <div id="profile-page" class="page">
+            <div class="modal-header"><div class="modal-title">Профиль</div></div>
+            <div style="padding:16px 0">
                 <div class="profile-header">
                     <div class="avatar" id="user-avatar">👤</div>
                     <div class="profile-name" id="user-name">Пользователь</div>
                     <div class="profile-id" id="user-id">ID: ---</div>
                 </div>
-
                 <div class="section-title">Статистика</div>
                 <div class="stats-bar">
-                    <div class="stat-card">
-                        <div class="stat-icon">🔥</div>
-                        <div class="stat-value" id="p-streak">0</div>
-                        <div class="stat-label">Серия</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">✅</div>
-                        <div class="stat-value" id="p-lessons">0</div>
-                        <div class="stat-label">Уроков</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-value" id="p-xp">0</div>
-                        <div class="stat-label">XP</div>
-                    </div>
+                    <div class="stat-card"><div class="stat-icon">🔥</div><div class="stat-value" id="p-streak">0</div><div class="stat-label">Серия</div></div>
+                    <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" id="p-lessons">0</div><div class="stat-label">Уроков</div></div>
+                    <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-value" id="p-xp">0</div><div class="stat-label">XP</div></div>
                 </div>
-
                 <div class="section-title">Настройки</div>
                 <div class="settings-list">
-                    <div class="settings-item" onclick="showPage('premium')">
-                        <div class="settings-left">
-                            <div class="settings-icon">👑</div>
-                            <div class="settings-text">Premium</div>
-                        </div>
-                        <div class="settings-arrow">→</div>
-                    </div>
-                    <div class="settings-item" onclick="showAlert('Уведомления будут настроены позже')">
-                        <div class="settings-left">
-                            <div class="settings-icon">🔔</div>
-                            <div class="settings-text">Уведомления</div>
-                        </div>
-                        <div class="settings-arrow">→</div>
-                    </div>
-                    <div class="settings-item" onclick="showAlert('Спасибо за использование Content Factory!')">
-                        <div class="settings-left">
-                            <div class="settings-icon">❓</div>
-                            <div class="settings-text">Помощь</div>
-                        </div>
-                        <div class="settings-arrow">→</div>
-                    </div>
+                    <div class="settings-item" onclick="showPage('premium')"><div class="settings-left"><div class="settings-icon">👑</div><div class="settings-text">Premium</div></div><div class="settings-arrow">→</div></div>
+                    <div class="settings-item" onclick="showAlert('Спасибо за использование Content Factory!')"><div class="settings-left"><div class="settings-icon">❓</div><div class="settings-text">Помощь</div></div><div class="settings-arrow">→</div></div>
                 </div>
             </div>
         </div>
@@ -543,40 +256,61 @@
 
     <div class="bottom-nav">
         <div class="nav-items">
-            <button class="nav-item active" onclick="showPage('home')" data-page="home">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                Главная
-            </button>
-            <button class="nav-item" onclick="showPage('premium')" data-page="premium">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                Premium
-            </button>
-            <button class="nav-item" onclick="showPage('profile')" data-page="profile">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                Профиль
-            </button>
+            <button class="nav-item active" onclick="showPage('home')" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Главная</button>
+            <button class="nav-item" onclick="showPage('mentor')" data-page="mentor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Наставник</button>
+            <button class="nav-item" onclick="showPage('premium')" data-page="premium"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>Premium</button>
+            <button class="nav-item" onclick="showPage('profile')" data-page="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Профиль</button>
         </div>
     </div>
 
     <script>
         const tg = window.Telegram?.WebApp;
-        let user = null;
-        let allCourses = [];
-        let progress = {};
-        let currentCourse = null;
-        let currentLesson = null;
-        let activeFilter = 'all';
-
+        let user = null, allCourses = [], progress = {}, currentCourse = null, currentLesson = null, activeFilter = 'all';
         if (tg) { tg.ready(); tg.expand(); user = tg.initDataUnsafe?.user; }
 
         const tips = [
-            { title: 'Публикуй в прайм-тайм', text: 'Лучшее время для постов — 12:00-14:00 и 18:00-21:00.' },
-            { title: 'Hook в первые 2 секунды', text: 'Начинай видео с яркого момента или вопроса.' },
-            { title: 'Используй 3-5 хештегов', text: 'Слишком много хештегов снижает охват.' },
-            { title: 'Отвечай на комментарии', text: 'Вовлечение = рост. Отвечай всем в первые 30 минут.' },
-            { title: 'Репостируй в Stories', text: 'Каждый пост репость в Stories со стикером "Новый пост".' },
-            { title: 'Один стиль = узнаваемость', text: 'Используй единую цветовую палитру и шрифты.' },
-            { title: 'Коллаборации = рост', text: 'Делай совместные видео с блогерами твоего уровня.' }
+            {t:'Публикуй в прайм-тайм', x:'12:00-14:00 и 18:00-21:00 — пик активности аудитории.'},
+            {t:'Hook в первые 2 секунды', x:'Начинай с вопроса, шокирующего факта или необычного кадра.'},
+            {t:'3-5 хештегов — оптимум', x:'Смешивай крупные (>500к) и нишевые (<50к).'},
+            {t:'Отвечай на комментарии', x:'В первые 30 минут после публикации — это увеличивает охват.'},
+            {t:'Ресайкл контента', x:'Одно видео → Reels + TikTok + Shorts + пост + Stories.'},
+            {t:'Сохрани = ценность', x:'Instagram любит сохранения. Давай полезный контент.'},
+            {t:'Коллаборации = рост', x:'Совместные видео с блогерами твоего уровня.'}
+        ];
+
+        const ideasDB = {
+            'кулинария': ['5 блюд за 15 минут','Рецепт дня: завтрак','Что я ем за день','Рецепт из остатков в холодильнике','Бюджетное питание на неделю','Лайфхак с.special/спец/маслом','Сравнение: домашнее vs магазинное','Как красиво подать блюдо'],
+            'путешествия': ['10 мест которые стоит увидеть','Бюджетное путешествие','Что взять в дорогу','Лайфхаки для путешественников','Скрытые места','Путешествие за 1000₽','Путешествие на выходные','Что не стоит делать в путешествии'],
+            'мода': ['Образ дня','Capsule wardrobe за 10 вещей','Тренды сезона','Стиль за маленькие деньги','Лайфхаки для гардероба','Что надеть на...','Разбор гардероба','До/после стилизации'],
+            'технологии': ['Обзор гаджета','Топ-5 приложений','Лайфхак для телефона','Что нового в IT','Как автоматизировать','Бесплатные инструменты','Обзор софта','Сравнение гаджетов'],
+            'фитнес': ['Тренировка за 10 минут','Что есть до/после тренировки','Упражнения дома','Прогресс за месяц','Лайфхаки для похудения','Растяжка','Мотивация','Типичные ошибки'],
+            'бизнес': ['Как начать с нуля','История успеха','Ошибки предпринимателей','Лайфхаки для бизнеса','Как найти клиентов','Ценообразование','Маркетинг бесплатно','Тайм-менеджмент'],
+            'образование': ['Лайфхак для учёбы','Как запоминать','Топ-5 книг','Обзор курса','Как начать изучать','Советы для студентов','Мотивация учиться','Полезные ресурсы'],
+            'красота': ['Уход за кожей','Макияж за 5 минут','Тренды макияжа','Бюджетная косметика','Лайфхаки для волос','До/после ухода','Обзор средств','Рутина на вечер']
+        };
+
+        const templates = [
+            {title:'Заголовок для Reels', desc:'"Я потратил X часов на... чтобы выяснилось что..."', tag:'Reels', color:'#E1306C'},
+            {title:'Подпись для поста', desc:'"Сохрани, чтобы не потерять 👇 + 3-5 хештегов"', tag:'Пост', color:'#833AB4'},
+            {title:'Превью для YouTube', desc:'Лицо с эмоцией + 4-5 слов крупным текстом', tag:'YouTube', color:'#FF0000'},
+            {title:'Хук для TikTok', desc:'"Никто не расскажет ЭТО..." + трендовый звук', tag:'TikTok', color:'#010101'},
+            {title:'CTA (призыв)', desc:'"Подпишись ещё / Сохрани / Напиши в комментах"', tag:'Все', color:'#6c5ce7'},
+            {title:'Продающий пост', desc:'"Проблема → Решение → Как получить → Ссылка"', tag:'Продажи', color:'#10b981'},
+            {title:'Сторителлинг', desc:'"Герой → Проблема → Путь → Результат → Мораль"', tag:'История', color:'#F59E0B'},
+            {title:'Обзор/Отзыв', desc:'"Что это + Мои впечатления + Плюсы/Минусы + Вердикт"', tag:'Обзор', color:'#8B5CF6'}
+        ];
+
+        const checklist = [
+            {q:'Есть ли хук в первые 1-2 секунды?'},
+            {q:'Видео короткое (7-30 сек для Reels)?'},
+            {q:'Есть текст на экране?'},
+            {q:'Хорошее освещение?'},
+            {q:'Звук чёткий, без шума?'},
+            {q:'Есть CTA (подписка/комментарий)?'},
+            {q:'Добавлены 3-5 хештегов?'},
+            {q:'Подпись интригует/задаёт вопрос?'},
+            {q:'Репость в Stories?'},
+            {q:'Публикуешь в прайм-тайм?'}
         ];
 
         document.addEventListener('DOMContentLoaded', async () => {
@@ -585,165 +319,130 @@
                 document.getElementById('user-id').textContent = `ID: ${user.id}`;
                 document.getElementById('user-avatar').textContent = user.first_name?.[0] || '👤';
             }
-
             const tip = tips[Math.floor(Math.random() * tips.length)];
-            document.getElementById('tip-title').textContent = tip.title;
-            document.getElementById('tip-text').textContent = tip.text;
-
-            try {
-                const res = await fetch('/api/courses');
-                allCourses = await res.json();
-                renderPlatforms();
-                renderCourses();
-            } catch (e) { console.error(e); }
-
-            if (user) {
-                try {
-                    const res = await fetch(`/api/stats/${user.id}`);
-                    progress = await res.json();
-                    updateStats();
-                } catch (e) { console.error(e); }
-            }
+            document.getElementById('tip-title').textContent = tip.t;
+            document.getElementById('tip-text').textContent = tip.x;
+            try { const r = await fetch('/api/courses'); allCourses = await r.json(); renderPlatforms(); renderCourses(); } catch(e) {}
+            if (user) { try { const r = await fetch(`/api/stats/${user.id}`); progress = await r.json(); updateStats(); } catch(e) {} }
+            renderTemplates();
+            renderChecklist();
         });
 
         function renderPlatforms() {
-            const scroll = document.getElementById('platforms-scroll');
-            const platforms = [
-                { id: 'all', name: 'Все', icon: '🎓' },
-                { id: 'instagram', name: 'Instagram', icon: '📷' },
-                { id: 'youtube', name: 'YouTube', icon: '▶️' },
-                { id: 'tiktok', name: 'TikTok', icon: '🎵' },
-                { id: 'ai', name: 'AI', icon: '🤖' },
-                { id: 'general', name: 'Общее', icon: '📋' }
-            ];
-            scroll.innerHTML = platforms.map(p =>
-                `<div class="platform-chip ${p.id === activeFilter ? 'active' : ''}" onclick="filterPlatform('${p.id}')">
-                    <span class="chip-icon">${p.icon}</span> ${p.name}
-                </div>`
-            ).join('');
+            const s = document.getElementById('platforms-scroll');
+            const p = [{id:'all',n:'Все',i:'🎓'},{id:'instagram',n:'Instagram',i:'📷'},{id:'youtube',n:'YouTube',i:'▶️'},{id:'tiktok',n:'TikTok',i:'🎵'},{id:'ai',n:'AI',i:'🤖'},{id:'general',n:'Общее',i:'📋'}];
+            s.innerHTML = p.map(x => `<div class="platform-chip ${x.id===activeFilter?'active':''}" onclick="filterPlatform('${x.id}')"><span class="chip-icon">${x.i}</span> ${x.n}</div>`).join('');
         }
-
-        function filterPlatform(id) {
-            activeFilter = id;
-            renderPlatforms();
-            renderCourses();
-        }
-
+        function filterPlatform(id) { activeFilter = id; renderPlatforms(); renderCourses(); }
         function renderCourses() {
-            const grid = document.getElementById('courses-grid');
-            const filtered = activeFilter === 'all'
-                ? allCourses
-                : allCourses.filter(c => c.platform === activeFilter);
-
-            grid.innerHTML = filtered.map((course, i) => {
-                const completed = course.lessons.filter(l =>
-                    progress.completedLessons?.includes(`${course.id}-${l.id}`)
-                ).length;
-                const pct = (completed / course.lessons.length) * 100;
-                return `
-                    <div class="course-card animate-in" style="animation-delay:${i*0.05}s" onclick="openCourse('${course.id}')">
-                        <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:${course.color};border-radius:3px 0 0 3px;"></div>
-                        <div class="course-header">
-                            <div class="course-icon" style="background:${course.color}20;">${course.icon}</div>
-                            <div class="course-info">
-                                <div class="course-title">${course.title}</div>
-                                <div class="course-desc">${course.description}</div>
-                            </div>
-                        </div>
-                        <div class="course-meta">
-                            <div class="course-meta-item">📚 ${course.lessons.length} уроков</div>
-                            <div class="course-meta-item">✅ ${completed}/${course.lessons.length}</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width:${pct}%;background:${course.color}"></div>
-                        </div>
-                    </div>`;
+            const g = document.getElementById('courses-grid');
+            const f = activeFilter === 'all' ? allCourses : allCourses.filter(c => c.platform === activeFilter);
+            g.innerHTML = f.map((c, i) => {
+                const done = c.lessons.filter(l => progress.completedLessons?.includes(`${c.id}-${l.id}`)).length;
+                const pct = (done / c.lessons.length) * 100;
+                return `<div class="course-card animate-in" style="animation-delay:${i*.05}s" onclick="openCourse('${c.id}')">
+                    <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:${c.color};border-radius:3px 0 0 3px;"></div>
+                    <div class="course-header"><div class="course-icon" style="background:${c.color}20;">${c.icon}</div><div class="course-info"><div class="course-title">${c.title}</div><div class="course-desc">${c.description}</div></div></div>
+                    <div class="course-meta"><div class="course-meta-item">📚 ${c.lessons.length} уроков</div><div class="course-meta-item">✅ ${done}/${c.lessons.length}</div></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${c.color}"></div></div></div>`;
             }).join('');
         }
-
         function openCourse(id) {
             currentCourse = allCourses.find(c => c.id === id);
             if (!currentCourse) return;
             document.getElementById('course-title').textContent = currentCourse.title;
-
             document.getElementById('lesson-list').innerHTML = currentCourse.lessons.map((l, i) => {
                 const done = progress.completedLessons?.includes(`${id}-${l.id}`);
-                return `
-                    <div class="lesson-item ${done ? 'completed' : ''}" onclick="openLesson(${i})">
-                        <div class="lesson-number">${done ? '✓' : i+1}</div>
-                        <div class="lesson-content">
-                            <div class="lesson-title">${l.title}</div>
-                            <div class="lesson-duration">⏱ ${l.duration}</div>
-                        </div>
-                        <div class="lesson-check"></div>
-                    </div>`;
+                return `<div class="lesson-item ${done?'completed':''}" onclick="openLesson(${i})"><div class="lesson-number">${done?'✓':i+1}</div><div class="lesson-content"><div class="lesson-title">${l.title}</div><div class="lesson-duration">⏱ ${l.duration}</div></div><div class="lesson-check"></div></div>`;
             }).join('');
             showPage('course');
         }
-
         function openLesson(i) {
             if (!currentCourse) return;
             currentLesson = currentCourse.lessons[i];
             document.getElementById('lesson-title').textContent = currentLesson.title;
             document.getElementById('detail-title').textContent = currentLesson.title;
             document.getElementById('detail-meta').textContent = `⏱ ${currentLesson.duration}`;
-            document.getElementById('detail-content').innerHTML = `<p>${currentLesson.content}</p><p>Следуй инструкциям и нажми "Завершить урок" когда готов!</p>`;
-
+            document.getElementById('detail-content').innerHTML = `<p>${currentLesson.content}</p>`;
             const done = progress.completedLessons?.includes(`${currentCourse.id}-${currentLesson.id}`);
             const btn = document.getElementById('complete-btn');
             btn.textContent = done ? '✓ Пройдено' : 'Завершить урок';
             btn.className = `complete-btn ${done ? 'done' : ''}`;
             showPage('lesson');
         }
-
         async function completeLesson() {
             if (!user || !currentCourse || !currentLesson) return;
             const btn = document.getElementById('complete-btn');
             if (btn.classList.contains('done')) return;
-
             try {
-                const res = await fetch('/api/progress', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId: user.id, courseId: currentCourse.id, lessonId: currentLesson.id })
-                });
-                progress = await res.json();
-                updateStats();
-                renderCourses();
-                btn.textContent = '✓ Пройдено';
-                btn.className = 'complete-btn done';
+                const r = await fetch('/api/progress', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({userId:user.id,courseId:currentCourse.id,lessonId:currentLesson.id}) });
+                progress = await r.json(); updateStats(); renderCourses();
+                btn.textContent = '✓ Пройдено'; btn.className = 'complete-btn done';
                 if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-            } catch (e) { console.error(e); }
+            } catch(e) {}
+        }
+        function updateStats() {
+            document.getElementById('lessons-done').textContent = progress.totalCompleted||0;
+            document.getElementById('xp-count').textContent = progress.xp||0;
+            document.getElementById('level-count').textContent = progress.level||1;
+            document.getElementById('streak-count').textContent = `${progress.streak||0} дней подряд`;
+            document.getElementById('p-streak').textContent = progress.streak||0;
+            document.getElementById('p-lessons').textContent = progress.totalCompleted||0;
+            document.getElementById('p-xp').textContent = progress.xp||0;
         }
 
-        function updateStats() {
-            const lessons = progress.totalCompleted || 0;
-            const xp = progress.xp || 0;
-            const level = progress.level || 1;
-            const streak = progress.streak || 0;
+        // AI MENTOR
+        async function sendMsg() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+            input.value = '';
+            addChatMsg(msg, 'user');
+            addChatMsg('<span class="loading-dots">Думаю</span>', 'ai', 'loading');
+            try {
+                const r = await fetch('/api/ai-mentor', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:msg}) });
+                const d = await r.json();
+                document.getElementById('loading')?.remove();
+                addChatMsg(d.response, 'ai');
+            } catch(e) {
+                document.getElementById('loading')?.remove();
+                addChatMsg('Извини, произошла ошибка. Попробуй ещё раз.', 'ai');
+            }
+        }
+        function sendQuick(q) { document.getElementById('chat-input').value = q; sendMsg(); }
+        function addChatMsg(text, type, id) {
+            const box = document.getElementById('chat-messages');
+            const label = type === 'ai' ? '<span class="ai-label">🤖 Наставник</span>' : '';
+            const div = document.createElement('div');
+            div.className = `chat-msg ${type}`;
+            if (id) div.id = id;
+            div.innerHTML = label + text;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
 
-            document.getElementById('lessons-done').textContent = lessons;
-            document.getElementById('xp-count').textContent = xp;
-            document.getElementById('level-count').textContent = level;
-            document.getElementById('streak-count').textContent = `${streak} дней подряд`;
-            document.getElementById('p-streak').textContent = streak;
-            document.getElementById('p-lessons').textContent = lessons;
-            document.getElementById('p-xp').textContent = xp;
+        // TOOLS
+        function openTool(name) { showPage(name); }
+        function genIdeas(niche) {
+            const ideas = ideasDB[niche] || [];
+            document.getElementById('ideas-output').innerHTML = `<div class="section-title">Идеи для ${niche}</div>` + ideas.map(i => `<div class="template-card"><div class="template-title">💡 ${i}</div><div class="template-desc">Используй как тему для Reels, поста или видео</div></div>`).join('');
+        }
+        function renderTemplates() {
+            document.getElementById('templates-output').innerHTML = templates.map(t => `<div class="template-card" onclick="showAlert('${t.desc.replace(/'/g,"\\'")}')"><div class="template-title">${t.title}</div><div class="template-desc">${t.desc}</div><div class="template-tag" style="background:${t.color}20;color:${t.color}">${t.tag}</div></div>`).join('');
+        }
+        function renderChecklist() {
+            document.getElementById('checklist-output').innerHTML = '<div class="section-title">Проверь свой пост перед публикацией</div>' + checklist.map((c, i) => `<div class="template-card" onclick="this.style.opacity=this.style.opacity==='0.5'?'1':'0.5';this.style.borderLeft=this.style.borderLeft==='3px solid #10b981'?'':'3px solid #10b981'"><div class="template-title">${i+1}. ${c.q}</div></div>`).join('');
         }
 
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(`${page}-page`).classList.add('active');
+            document.getElementById(`${page}-page`)?.classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            const nav = document.querySelector(`[data-page="${page}"]`);
-            if (nav) nav.classList.add('active');
+            document.querySelector(`[data-page="${page}"]`)?.classList.add('active');
             if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
             window.scrollTo(0, 0);
         }
-
-        function showAlert(text) {
-            tg?.showAlert ? tg.showAlert(text) : alert(text);
-        }
+        function showAlert(text) { tg?.showAlert ? tg.showAlert(text) : alert(text); }
     </script>
 </body>
 </html>

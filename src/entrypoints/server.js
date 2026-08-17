@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const CourseService = require('../services/CourseService');
 const ProgressService = require('../services/ProgressService');
+const aiMentor = require('../adapters/aiMentor');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -47,6 +48,15 @@ app.post('/api/progress', (req, res) => {
   }
   const progress = ProgressService.completeLesson(userId, courseId, lessonId);
   res.json(progress);
+});
+
+app.post('/api/ai-mentor', (req, res) => {
+  const { message } = req.body;
+  if (!message) {
+    return res.status(400).json({ error: 'message is required' });
+  }
+  const response = aiMentor.getResponse(message);
+  res.json({ response });
 });
 
 app.get('*', (req, res) => {
