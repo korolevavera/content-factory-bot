@@ -1,0 +1,17 @@
+{
+  "name": "content-factory-bot",
+  "version": "1.0.0",
+  "description": "Telegram Mini App - Content Factory для блогеров",
+  "main": "src/entrypoints/server.js",
+  "scripts": {
+    "start": "node src/entrypoints/server.js",
+    "dev": "node src/entrypoints/server.js",
+    "test": "node --test tests/unit/*.test.js",
+    "test:integration": "node --test tests/integration/*.test.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["telegram", "mini-app", "content-creator", "education"],
+  "license": "MIT"
+}
