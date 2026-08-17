@@ -8,9 +8,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..', '..', 'public'), { setHeaders: (res, path) => {
-  if (path.endsWith('.html')) {
+app.use(express.static(path.join(__dirname, '..', '..', 'public'), { setHeaders: (res, filePath) => {
+  if (filePath && filePath.endsWith('.html')) {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
   }
 }}));
 
